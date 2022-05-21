@@ -198,19 +198,19 @@ void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
     int i, counter, player1Count, player2Count;
     for (i=0; i<18; i++){
         if (b->owner == 1){
-            player1Count += b[i]->1.5 * b[i]->buyPrice + (1.5 * b[i]->buildPrice) * b[i]->condition;
+            player1Count += 1.5 * b[i]->buyPrice + (1.5 * b[i]->buildPrice) * b[i]->condition;
         }
         else if (b->owner == 2){
-            player2Count += b[i]->1.5 * b[i]->buyPrice + (1.5 * b[i]->buildPrice) * b[i]->condition;
+            player2Count += 1.5 * b[i]->buyPrice + (1.5 * b[i]->buildPrice) * b[i]->condition;
         }
     }
     if (player1Count > player2Count){
         printf ("Congradulate!! Player %s wins the game.\n", p1->name);
-        printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count)
+        printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
     else if (player1Count < player2Count){
         printf ("Congradulate!! Player %s wins the game.", p2->name);
-        printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count)
+        printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
     else if (player1Count == player2Count){
         printf ("There is no winner in the game!");
