@@ -124,8 +124,8 @@ int main()
 	printLand();
 	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
-	printf("Whether to open the round?(print y=yes, n=no and end the game)");
 	while (scanf_c("%c\n", game_switch, 1) == "y") {
+		printf("Whether to open the round?(print y=yes, n=no and end the game)");
 		if (p1.gameStatus >= 0) {
 			move(&p1);
 			printPlayerLocation(p1.location, p2.location);
