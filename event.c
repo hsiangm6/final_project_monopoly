@@ -23,6 +23,25 @@ void draw(struct Player** p1){
     }
 }
 
-void casino(struct Player** p1){
-    
+void casino (struct player* p1){
+	char ch, ch2;
+	int coin, temp;
+	coin = rand () % 2;
+	printf ("Spend $2000.\n");
+	printf ("Select odds. (a)x2 (b)x3 (c)x4\n>");
+	scanf ("%c", &ch);
+	getchar();
+	printf ("Select front back. (f)front (b)back.\n>");
+	scanf ("%c", &ch2);
+	if (ch2 == 102) temp = 0;
+	if (ch2 == 98) temp = 1;
+
+	if (temp == coin){
+		p1.money = p1.money +(2000*(ch-95));
+		printf ("You win!\nGet $%d.", (2000*(ch-95)));
+	}
+	else {
+		p1.money = p1.money -2000;
+		printf ("You loose.\nLoose $2000.");
+	}
 }
