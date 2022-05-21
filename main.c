@@ -141,7 +141,7 @@ int main()
 			move(&p2);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
-			event(& p2, &b[p2.location]);
+			event(&p2, &b[p2.location]);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
