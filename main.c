@@ -54,7 +54,7 @@ void move(struct Player *player);
 int main()
 {
 	char nameOfPlayer1[100], nameOfPlayer2[100];
-	char game_switch = "y";
+	char game_switch = 'y';
 	printf("Please enter the name of player 1: ");
     scanf_s("%s", nameOfPlayer1,99);
     printf("Please enter the name of player 2: ");
@@ -104,7 +104,7 @@ int main()
 	printLand();
 	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
-	while (scanf_c("%c\n", game_switch, 1) == "y") {
+	while (game_switch == "y") {
 		printf("Whether to open the round?(print y=yes, n=no and end the game)");
 		if (p1.gameStatus >= 0) {
 			move(&p1);
@@ -133,6 +133,7 @@ int main()
 
 void printLand()
 {
+	//system("CLS");
 	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
         	landmark[91],
