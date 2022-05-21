@@ -48,7 +48,7 @@ typedef struct Player
 	int money;
 	char *name;
 	int location;
-	
+	int gamestatus;
 } Player;
 
 typedef struct Building
@@ -97,9 +97,17 @@ int main()
 	printf("Whether to open the round?(print y=yes, n=no and end the game)");
 	while (scanf_c("%c\n", game_switch, 1) == "y") {
 		move(&p1);
+		printPlayerLocation(p1.location, p2.location);
+		printLand();
 		event(&p1);
+		printPlayerLocation(p1.location, p2.location);
+		printLand();
 		move(&p2);
+		printPlayerLocation(p1.location, p2.location);
+		printLand();
 		event(&p2);
+		printPlayerLocation(p1.location, p2.location);
+		printLand();
 
 	}
 }
