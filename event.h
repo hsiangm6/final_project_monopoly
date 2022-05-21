@@ -4,7 +4,7 @@ typedef struct Player
 	int money;
 	char *name;
 	int location;
-	int gamestatus = 0;
+	int gameStatus = 0;
 } Player;
 typedef struct Building
 {
@@ -20,4 +20,4 @@ typedef struct Building
 void event(struct Player*);
 void draw(struct Player*);
 void casino(struct Player*);
-void buy(struct Building*);
+void buy(struct Player*,struct Building*);
