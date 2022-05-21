@@ -1,65 +1,66 @@
 #include "event.h"
 #include <stdlib.h>
 #include <time.h>
-void event(struct Player* p1,struct Building* b){
+void event(struct Player* player,struct Building* b){
 	srand(time(NULL));
-    switch(p1->location){
+    switch(player->location){
         case 5://jail
-            p1->gameStatus = -1;
+			player->gameStatus = -1;
 			break;
         case 2:
         case 11://draw cards
-            draw(p1);
+			draw(&player, &b[player->location]);
 			break;
         case 9://casino
-            casino(p1);
+            casino(player);
 			break;
         case 14://go to start
-            p1->location = 0;
-            p1->money += 10000;
+			player->location = 0;
+			player->money += 10000;
 			break;
 		case 0:
 			break;
 		default:
-			buy(p1,b);
+			buy(player,b);
 			break;
     }
 }
 
-void draw(struct Player* p1){
-    card = rand() % 11;
+void draw(struct Player* player, struct Building* b){
+    int card = rand() % 11;
+	int target = rand() % 18;
     switch(card){
 	case 0:
 	case 1:
 	case 2:
 		printf("The newly hired supervisor has good performance management, increasing the overall turnover by %d NT dollars.\n", 1000 + card * 2000);
-		p1-> money += 1000 + card * 2000;
+		player-> money += 1000 + card * 2000;
 		break;
 	case 3:
 	case 4:
 	case 5:
 		printf("You are unqualified by the health bureau, so you are fined %d NT dollars.\n", -(1000 + (card - 2) * 2000));
-		p1-> money -= (1000 + (card - 2) * 2000);
+		player-> money -= (1000 + (card - 2) * 2000);
 		break;
 	case 6:
-		target = rand()% 18;
+		
 		printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d\n", target);
-		p1-> location = target;
-		event(p1);
+		player-> location = target;
+		event(&player, &b[player->location]);
 		break;
 	case 7:
-		printf("You become an honorary real estate tycoon, so the people invite you to the next location: %d", p1->location + 1)
-		p1-> location += 1;
-		event(p1);
+		printf("You become an honorary real estate tycoon, so the people invite you to the next location: %d", player->location + 1);
+		player-> location += 1;
+		event(&player, &b[player->location]);
 		break;
 	case 8:
-		printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", p1->location - 1);
-		p1-> location -= 1;
-		event(p1);
+		printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", player->location - 1);
+		player-> location -= 1;
+		event(&player, &b[player->location]);
 		break;
 	case 9:
-		p1-> location = 5;
-		event(p1);
+		player-> location = 5;
+		event(&player, &b[player->location]);
 		break;
 	case 10:
 		target=0;
@@ -67,8 +68,8 @@ void draw(struct Player* p1){
 		scanf_d("%d",target);
 		if(target>=0 && target<=17){
 			printf("You will be teleported to specified location: %d", target);
-			p1-> location = target;
-			event(p1);
+			player-> location = target;
+			event(&player,&b[player->location]);
 		}
 		break; 
 	default:
@@ -76,11 +77,11 @@ void draw(struct Player* p1){
     }
 }
 
-void casino (struct player* p1){
-	char ch, ch2, ch3;
+void casino (struct Player* player){
+	char ch='\0', ch2 = '\0', ch3 = '\0';
 	int coin, temp, round=1, playCondition=1, ip;
 	while (playCondition == 1){
-		if (p1->money <2000){	//Do you have money?
+		if (player->money <2000){	//Do you have money?
 			printf ("You don't have enough money!");
 			break;
 		}
@@ -121,11 +122,11 @@ void casino (struct player* p1){
 		}
 
 		if (temp == coin){
-			p1->money += (2000*(ch-95));
+			player->money += (2000*(ch-95));
 			printf ("You Win!\nGet $%d.\n", (2000*(ch-95)));
 		}
 		else {
-			p1->money -= (2000*(ch-95));
+			player->money -= (2000*(ch-95));
 			printf ("You Loose.\nLoose $%d.\n", (2000*(ch-95)));
 		}
 
@@ -153,13 +154,13 @@ void casino (struct player* p1){
 	}
 }
 
-void buy(struct Player* p1, struct Building* b) {
+void buy(struct Player* player, struct Building* b) {
 	char buy_switch = "y";
-	switch (b[p1->location]->condition) {
+	switch (b[player->location].condition) {
 		
 		//land
 		case -1:
-			printf("Your current cash is %d.", p1->money);
+			printf("Your current cash is %d.", player->money);
 			printf("Are you going to buy the land?(only y/n):");
 			scanf("%c", buy_switch);
 			while (buy_switch != "y" && buy_switch != "n") {  //fool‑proof design
@@ -167,23 +168,23 @@ void buy(struct Player* p1, struct Building* b) {
 				scanf("%c", buy_switch);
 			}
 			if (buy_switch == "y") {   //buy the land
-				b[p1->location]->condition = 0;
-				p1->money -= b[p1->location]->buyPrice;
-				b[p1->location]->owner = p1->player_number;
-				printf("Your current cash is %d.", p1->money);
+				b[player->location].condition = 0;
+				player->money -= b[player->location].buyPrice;
+				b[player->location].owner = player->player_number;
+				printf("Your current cash is %d.", player->money);
 			}
 			else {
-				printf("What a shame! You didn't buy the land\n")
+				printf("What a shame! You didn't buy the land\n");
 			}
 			break;
 
 		//flag
 		case 0:
 			//arrive the own flag
-			if (b[p1->location]->owner == p1->player_number) {  
+			if (b[player->location].owner == player->player_number) {
 
 				//whether buy house on own flag
-				printf("Your current cash is %d.", p1->money);
+				printf("Your current cash is %d.", player->money);
 				printf("Are you going to buy the house?(only y/n):");
 				scanf("%c", buy_switch);
 
@@ -194,9 +195,9 @@ void buy(struct Player* p1, struct Building* b) {
 				}
 
 				if (buy_switch == "y") {
-					b[p1->location]->condition = 1;
-					p1->money -= b[p1->location]->buildPrice;
-					printf("Your current cash is %d.", p1->money);
+					b[player->location].condition = 1;
+					player->money -= b[player->location].buildPrice;
+					printf("Your current cash is %d.", player->money);
 				}
 				else {
 					printf("What a shame! You didn't buy the house\n");
@@ -205,7 +206,7 @@ void buy(struct Player* p1, struct Building* b) {
 
 			//arrive someone else's flag
 			else {   
-				printf("Your current cash is %d.", p1->money);
+				printf("Your current cash is %d.", player->money);
 				printf("Are you going to buy the land of your opponent?(only y/n):");
 				scanf("%c", buy_switch);
 
@@ -217,17 +218,17 @@ void buy(struct Player* p1, struct Building* b) {
 
 				//buy someone else's flag
 				if (buy_switch == "y") {
-					b[p1->location]->owner = p1->player_number;
-					p1->money -= b[p1->location]->finalPrice;
-					printf("Your current cash is %d.", p1->money);
+					b[player->location].owner = player->player_number;
+					player->money -= b[player->location].finalPrice;
+					printf("Your current cash is %d.", player->money);
 				}
 
 				//pay the fee
 				else {
-					printf("What a shame! You didn't buy the house\n")
+					printf("What a shame! You didn't buy the house\n");
 					printf("Please pay the fee!\n");
-					p1->money -= b[p1->location]->fee;
-					printf("Your current cash is %d.", p1->money);
+					player->money -= b[player->location].fee;
+					printf("Your current cash is %d.", player->money);
 				}
 			}
 			
@@ -236,14 +237,14 @@ void buy(struct Player* p1, struct Building* b) {
 		//structure
 		case 1: 
 			//arrive the own estate
-			if (b[p1->location]->owner == p1->player_number) {
+			if (b[player->location].owner == player->player_number) {
 				printf("You arrive your own estate!\n");
 				break;
 			}
 
 			//arrive someone else's structure
 			else {
-				printf("Your current cash is %d.", p1->money);
+				printf("Your current cash is %d.", player->money);
 				printf("Are you going to buy the estate?(only y/n):");
 				scanf("%c", buy_switch);
 
@@ -255,17 +256,17 @@ void buy(struct Player* p1, struct Building* b) {
 
 				//buy someone else's land
 				if (buy_switch == "y") {
-					b[p1->location]->owner = p1->player_number;
-					p1->money -= b[p1->location]->finalPrice;
-					printf("Your current cash is %d.", p1->money);
+					b[player->location].owner = player->player_number;
+					player->money -= b[player->location].finalPrice;
+					printf("Your current cash is %d.", player->money);
 				}
 
 				//pay the fee
 				else {
 					printf("What a shame! You didn't buy the house\n");
 					printf("Please pay the fee!");
-					p1->money -= b[p1->location]->fee;
-					printf("Your current cash is %d.", p1->money);
+					player->money -= b[player->location].fee;
+					printf("Your current cash is %d.", player->money);
 				}
 			}
 			break;

@@ -43,27 +43,7 @@ char *landmark[] = {"      ", "      ", "  ", "  ", "  ",
 					
 					"******** ******** ******** ******** ******** ********", "********                                     ********" };
 
-typedef struct Player
-{
-	int money;
-	char *name;
-	int location;
-	int gameStatus;
-	int player_number;
-	
-} Player;
 
-typedef struct Building
-{
-	int owner; // The land is occupied by whom, 1 is for player 1, 2 is for player 2, 0 is colonized by no one.
-	int condition; // The current status of the land, 0 is a flag, 1 is structure, while -1 is the place.
-	int buyPrice; // The price of occupying this place with a flag.
-	int buildPrice; // The price of building this flag to the structure.
-	int finalPrice; // The eventual price of this land.
-	int fee; // The fee that the opponent being through be supposed to pay. 
-	int buyPriceFromTheOpponent; // The price of this land buying from the opponent.
-	
-} Building;
 
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
@@ -76,9 +56,9 @@ int main()
 	char nameOfPlayer1[100], nameOfPlayer2[100];
 	char game_switch = "y";
 	printf("Please enter the name of player 1: ");
-    	scanf("%s", nameOfPlayer1);
-    	printf("Please enter the name of player 2: ");
-	scanf("%s", nameOfPlayer2);
+    scanf_s("%s", nameOfPlayer1,99);
+    printf("Please enter the name of player 2: ");
+	scanf_s("%s", nameOfPlayer2,99);
 	
 	Player p1 =
 	{
@@ -195,13 +175,13 @@ void buildingStructure(Building *b)
 }
 
 void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
-    int i, counter, player1Count, player2Count;
+    int i, counter=0, player1Count=0, player2Count=0;
     for (i=0; i<18; i++){
-        if (b->owner == 1){
-            player1Count += 1.5 * b[i]->buyPrice + (1.5 * b[i]->buildPrice) * b[i]->condition;
+        if (b[i].owner == 1) {
+            player1Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
         }
-        else if (b->owner == 2){
-            player2Count += 1.5 * b[i]->buyPrice + (1.5 * b[i]->buildPrice) * b[i]->condition;
+        else if (b[i].owner == 2){
+            player2Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
         }
     }
     if (player1Count > player2Count){

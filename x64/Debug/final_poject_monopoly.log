@@ -1,13 +1,5 @@
-﻿  main.c
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(1,1): warning C4819: 檔案含有無法在目前字碼頁 (936) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(24,149): error C2061: 語法錯誤: 識別項 '鈥斺€斺€斺€'
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(64,70): warning C4474: 'printf': 傳遞給格式字串的引數太多
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(64,70): message : 預留位置及其參數需要 17 個 variadic 引數，但卻提供了 20 個
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(67,126): warning C4474: 'printf': 傳遞給格式字串的引數太多
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(67,126): message : 預留位置及其參數需要 2 個 variadic 引數，但卻提供了 11 個
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(68,126): warning C4474: 'printf': 傳遞給格式字串的引數太多
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(68,126): message : 預留位置及其參數需要 2 個 variadic 引數，但卻提供了 11 個
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(69,126): warning C4474: 'printf': 傳遞給格式字串的引數太多
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(69,126): message : 預留位置及其參數需要 2 個 variadic 引數，但卻提供了 11 個
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(76,73): warning C4474: 'printf': 傳遞給格式字串的引數太多
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(76,73): message : 預留位置及其參數需要 17 個 variadic 引數，但卻提供了 20 個
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
+event.obj : error LNK2019: 在函式 scanf_ddraw 中參考了無法解析的外部符號
+event.obj : error LNK2019: 在函式 scanfbuy 中參考了無法解析的外部符號
+main.obj : error LNK2019: 在函式 scanf_cmain 中參考了無法解析的外部符號
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe : fatal error LNK1120: 3 個無法解析的外部符號

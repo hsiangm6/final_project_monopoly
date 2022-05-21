@@ -5,6 +5,7 @@ typedef struct Player
 	char *name;
 	int location;
 	int gameStatus;
+	int player_number;
 } Player;
 typedef struct Building
 {

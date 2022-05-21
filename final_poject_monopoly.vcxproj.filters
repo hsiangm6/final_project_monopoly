@@ -18,12 +18,12 @@
     <ClCompile Include="main.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="move.c">
+    <ClCompile Include="event.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="move.h">
+    <ClInclude Include="event.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
   </ItemGroup>
