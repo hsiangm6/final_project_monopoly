@@ -1,6 +1,4 @@
-void event(struct Player*);
-void draw(struct Player*);
-void casino(struct Player*);
+
 typedef struct Player
 {
 	int money;
@@ -18,3 +16,8 @@ typedef struct Building
 	int condition; // The current status of the land, 0 is a flag, while 1 is structure.
 	int owner; // The land is occupied by whom.
 } Building;
+
+void event(struct Player*);
+void draw(struct Player*);
+void casino(struct Player*);
+void buy(struct Building*);
