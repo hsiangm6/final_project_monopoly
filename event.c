@@ -6,9 +6,9 @@ void event(struct Player* p1){
             p1->gamestatus = -1 ;
         case 2:
         case 11://draw cards
-            draw(&p1);
+            draw(p1);
         case 9://casino
-            casino(&p1);
+            casino(p1);
         case 14://go to start
             p1->location = 0;
             p1->money += 10000;
