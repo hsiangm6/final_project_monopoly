@@ -22,6 +22,7 @@ void event(struct Player* p1,struct Building* b){
 			break;
 		default:
 			buy(p1,b);
+			break;
     }
 }
 
@@ -42,15 +43,17 @@ void draw(struct Player* p1){
 		break;
 	case 6:
 		target = rand()% 18;
-		printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d", target);
+		printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d\n", target);
 		p1-> location = target;
 		event(p1);
 		break;
 	case 7:
+		printf("You become an honorary real estate tycoon, so the people invite you to the next location: %d", p1->location + 1)
 		p1-> location += 1;
 		event(p1);
 		break;
 	case 8:
+		printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", p1->location - 1);
 		p1-> location -= 1;
 		event(p1);
 		break;
