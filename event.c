@@ -155,7 +155,7 @@ void casino (struct Player* player){
 }
 
 void buy(struct Player* player, struct Building* b) {
-	char buy_switch = "y";
+	char buy_switch = 'y';
 	switch (b[player->location].condition) {
 		
 		//land
@@ -163,11 +163,11 @@ void buy(struct Player* player, struct Building* b) {
 			printf("Your current cash is %d.", player->money);
 			printf("Are you going to buy the land?(only y/n):");
 			scanf_s("%c", buy_switch);
-			while (buy_switch != "y" && buy_switch != "n") {  //fool‑proof design
+			while (buy_switch != 'y' && buy_switch != 'n') {  //fool‑proof design
 				printf("Are you going to buy the land?(only y/n):");
 				scanf_s("%c", buy_switch);
 			}
-			if (buy_switch == "y") {   //buy the land
+			if (buy_switch == 'y') {   //buy the land
 				b[player->location].condition = 0;
 				player->money -= b[player->location].buyPrice;
 				b[player->location].owner = player->player_number;
@@ -189,12 +189,12 @@ void buy(struct Player* player, struct Building* b) {
 				scanf_s("%c", buy_switch);
 
 				//fool‑proof design
-				while (buy_switch != "y" && buy_switch != "n") {  
+				while (buy_switch != 'y' && buy_switch != 'n') {
 					printf("Are you going to buy the house?(only y/n):");
 					scanf_s("%c", buy_switch);
 				}
 
-				if (buy_switch == "y") {
+				if (buy_switch == 'y') {
 					b[player->location].condition = 1;
 					player->money -= b[player->location].buildPrice;
 					printf("Your current cash is %d.", player->money);
@@ -211,13 +211,13 @@ void buy(struct Player* player, struct Building* b) {
 				scanf_s("%c", buy_switch);
 
 				//fool‑proof design
-				while (buy_switch != "y" && buy_switch != "n") {  
+				while (buy_switch != 'y' && buy_switch != 'n') {
 					printf("Are you going to buy the land of your opponent?(only y/n):");
 					scanf_s("%c", buy_switch);
 				}
 
 				//buy someone else's flag
-				if (buy_switch == "y") {
+				if (buy_switch == 'y') {
 					b[player->location].owner = player->player_number;
 					player->money -= b[player->location].finalPrice;
 					printf("Your current cash is %d.", player->money);
@@ -249,13 +249,13 @@ void buy(struct Player* player, struct Building* b) {
 				scanf_s("%c", buy_switch);
 
 				//fool‑proof design
-				while (buy_switch != "y" && buy_switch != "n") {
+				while (buy_switch != 'y' && buy_switch != 'n') {
 					printf("Are you going to buy the estate?(only y/n):");
 					scanf_s("%c", buy_switch);
 				}
 
 				//buy someone else's land
-				if (buy_switch == "y") {
+				if (buy_switch == 'y') {
 					b[player->location].owner = player->player_number;
 					player->money -= b[player->location].finalPrice;
 					printf("Your current cash is %d.", player->money);

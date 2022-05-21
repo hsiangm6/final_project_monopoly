@@ -104,8 +104,8 @@ int main()
 	printLand();
 	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
-	while (game_switch == "y") {
-		printf("Whether to open the round?(print y=yes, n=no and end the game)");
+	while (game_switch == 'y') {
+		
 		if (p1.gameStatus >= 0) {
 			move(&p1);
 			printPlayerLocation(p1.location, p2.location);
@@ -128,6 +128,8 @@ int main()
 		else {
 			continue;
 		}
+		printf("Whether to open the round?(print y=yes, n=no and end the game)");
+		scanf_s("%c", &game_switch, 1);
 	}
 }
 
@@ -159,9 +161,9 @@ void printPlayerLocation(int p1Location, int p2Location)
 {
 	int i;
 	for(i=2; i<=87; i+=5)
-		landmark[i] == "  ";
+		landmark[i] = "  ";
 	for(i=3; i<=88; i+=5)
-		landmark[i] == "  ";
+		landmark[i] = "  ";
 	
 	landmark[p1Location * 5 + 2] = " 1";
 	landmark[p2Location * 5 + 4] = "2 ";

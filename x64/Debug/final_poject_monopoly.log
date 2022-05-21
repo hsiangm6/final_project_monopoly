@@ -1,12 +1,19 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
-  main.c
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(107,27): warning C4047: '==': 'int' 與 'char [2]' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(162,15): warning C4553: '==': 未使用運算式結果; 您是否想要 '='?
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(164,15): warning C4553: '==': 未使用運算式結果; 您是否想要 '='?
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(172,24): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(173,40): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(174,17): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(182,29): warning C4244: '+=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(185,29): warning C4244: '+=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(202,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+  event.c
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(5,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(12,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(12,9): warning C4024: 'draw': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(36,9): warning C4013: 'printf' 未定義; 假設 extern 傳回整數
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(49,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(49,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(54,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(54,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(59,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(59,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(63,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(63,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(68,10): warning C4013: 'scanf_s' 未定義; 假設 extern 傳回整數
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(72,17): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(72,10): warning C4024: 'event': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(96,11): warning C4013: 'getchar' 未定義; 假設 extern 傳回整數
   final_poject_monopoly.vcxproj -> C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe
