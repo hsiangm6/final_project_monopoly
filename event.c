@@ -77,25 +77,79 @@ void draw(struct Player* p1){
 }
 
 void casino (struct player* p1){
-	char ch, ch2;
-	int coin, temp;
-	coin = rand () % 2;	//random front back
-	printf ("Spend $2000 playing game.\n");
-	printf ("Input odds selection. (a)x2 (b)x3 (c)x4\n>");
-	scanf ("%c", &ch);
-	getchar();	//clean scanf
-	printf ("Input front back selection. (f)front (b)back.\n>");
-	scanf ("%c", &ch2);
-	if (ch2 == 102) temp = 0;	//front(f)
-	if (ch2 == 98) temp = 1;	//back(b)
+	char ch, ch2, ch3;
+	int coin, temp, round=1, playCondition=1, ip;
+	while (playCondition == 1){
+		if (p1->money <2000){	//Do you have money?
+			printf ("You don't have enough money!");
+			break;
+		}
 
-	if (temp == coin){
-		p1->money += (2000*(ch-95));
-		printf ("You Win!\nGet $%d.", (2000*(ch-95)));
-	}
-	else {
-		p1->money -= 2000;
-		printf ("You Loose.\nLoose $2000.");
+		printf ("Welcom to Casino Game. This round %d. \n", round);
+		coin = rand () % 2;	//random front back
+
+		ip =1;
+		while (ip == 1){	//Fundai
+			printf ("Basic cost is $2000.\nPlease input odds selection. (a)x2 (b)x3 (c)x4\n>");
+			scanf ("%c", &ch);
+			getchar();	//clean scanf
+			if (ch <= 99 && ch >= 97) ip = 0;
+			else {
+				printf ("Please enter correct content!\n");
+				ip=1;
+			}
+		}
+
+		ip =1;
+		while (ip == 1){	//Fundai
+			printf ("Please input front back selection. (f)front (b)back.\n>");
+			scanf ("%c", &ch2);
+			getchar();	//clean scanf
+
+			if (ch2 == 102){
+				temp = 0;
+				ip =0;
+			}	//front(f)
+			else if (ch2 == 98){
+				temp = 1;
+				ip=0;
+			}	//back(b)
+			else {
+				printf ("Please enter correct content!\n");
+				ip =1;
+			}
+		}
+
+		if (temp == coin){
+			p1->money += (2000*(ch-95));
+			printf ("You Win!\nGet $%d.\n", (2000*(ch-95)));
+		}
+		else {
+			p1->money -= (2000*(ch-95));
+			printf ("You Loose.\nLoose $%d.\n", (2000*(ch-95)));
+		}
+
+		if (round == 3) break;
+
+		ip =1;
+		while (ip =1){	//防呆
+			printf ("Do you want to play again? Enter 'Y' to continue, 'n' to leave the game.\n>");
+			scanf ("%c", &ch3);
+			getchar();	//clean scanf
+			if (ch3 == 89){
+				playCondition = 1;
+				round ++;
+				ip =0;
+			}
+			else if (ch3 == 110){
+				playCondition = 0;
+				ip =0;
+			}
+			else {
+				printf ("Please enter correct content!\n");
+				ip =1;
+			}
+		}
 	}
 }
 
