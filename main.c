@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "move.h"
+#include <time.h>
 #include "event.h"
 
 char *landmark[] = {"      ", "      ", "  ", "  ", "  ", 
@@ -68,6 +68,7 @@ typedef struct Building
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
 void buildingStructure(Building *b);
+void move(struct Player *player);
 
 int main()
 {
@@ -213,4 +214,15 @@ void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
     else if (player1Count == player2Count){
         printf ("There is no winner in the game!");
     }
+}
+
+void move(struct Player *player) {
+	srand(time(NULL)); //set random number seeds
+	int diceFace = 1 + (rand() % 6); //roll the dice
+	player->location += diceFace;
+
+	if (player->location > 17) { //pass the start point
+		player->location -= 18;
+		player->money += 10000;
+	}
 }
