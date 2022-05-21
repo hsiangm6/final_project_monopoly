@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "move.h"
+#include "event.h"
 
 char *landmark[] = {"      ", "      ", "  ", "  ", "  ", 
 
@@ -93,9 +95,12 @@ int main()
 	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
 	printf("Whether to open the round?(print y=yes, n=no and end the game)");
-	while (scanf_s("%c\n", game_switch, 1) == "y") {
+	while (scanf_c("%c\n", game_switch, 1) == "y") {
 		move(&p1);
+		event(&p1);
 		move(&p2);
+		event(&p2);
+
 	}
 }
 
