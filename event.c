@@ -47,11 +47,11 @@ void casino (struct player* p1){
 	if (ch2 == 98) temp = 1;	//back(b)
 
 	if (temp == coin){
-		p1.money = p1.money +(2000*(ch-95));
+		p1->money += (2000*(ch-95));
 		printf ("You Win!\nGet $%d.", (2000*(ch-95)));
 	}
 	else {
-		p1->money = p1->money -2000;
+		p1->money -= 2000;
 		printf ("You Loose.\nLoose $2000.");
 	}
 }
