@@ -1,1 +1,1 @@
-void event(struct)
+void event(Player*);
