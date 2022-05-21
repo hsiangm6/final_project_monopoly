@@ -3,7 +3,7 @@
 void event(struct Player* p1){
     switch(p1->location){
         case 5://jail
-            p1->gamestatus = -2 ;
+            p1->gamestatus = -1;
         case 2:
         case 11://draw cards
             draw(p1);
@@ -12,12 +12,14 @@ void event(struct Player* p1){
         case 14://go to start
             p1->location = 0;
             p1->money += 10000;
-            
+	case 0:
+	    ;
+	default:
     }
 }
 
 void draw(struct Player* p1){
-    card = rand() % 11;
+    card = rand() % 10;
     switch(card){
 	case 0:
 	case 1:
@@ -27,7 +29,19 @@ void draw(struct Player* p1){
 	case 4:
 	case 5:
 		p1-> money += 1000 - (card - 3) * 2000;
-	case 6:	    
+	case 6:
+		target = rand()% 18;
+		p1-> location = target;
+		event(p1);
+	case 7:
+		p1-> location += 1;
+		event(p1);
+	case 8:
+		p1-> location -= 1;
+		event(p1);
+	case 9:
+		p1-> location = 5;
+		event(p1);
     }
 }
 
