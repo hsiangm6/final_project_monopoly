@@ -48,7 +48,7 @@ typedef struct Player
 	int money;
 	char *name;
 	int location;
-	int gamestatus;
+	int gameStatus;
 } Player;
 
 typedef struct Building
