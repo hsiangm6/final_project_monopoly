@@ -105,6 +105,12 @@ void printLand()
 
 void printPlayerLocation(int p1Location, int p2Location)
 {
+	int i;
+	for(i=2; i<=87; i+=5)
+		landmark[i] == "  ";
+	for(i=3; i<=88; i+=5)
+		landmark[i] == "  ";
+	
 	landmark[p1Location * 5 + 2] = " 1";
 	landmark[p2Location * 5 + 4] = "2 ";
 }
