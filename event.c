@@ -30,8 +30,6 @@ void draw(struct Player* p1){
 	case 6:	    
     }
 }
-#include <stdio.h>
-#include <stdlib.h>
 
 void casino (struct player* p1){
 	char ch, ch2;
