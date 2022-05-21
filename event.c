@@ -15,6 +15,7 @@ void event(struct Player* p1){
 	case 0:
 	    ;
 	default:
+	    buy(p1);
     }
 }
 
@@ -42,6 +43,8 @@ void draw(struct Player* p1){
 	case 9:
 		p1-> location = 5;
 		event(p1);
+	default:
+		;
     }
 }
 
