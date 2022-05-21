@@ -3,7 +3,7 @@
 void event(struct Player* p1){
     switch(p1->location){
         case 5://jail
-            p1->gamestatus = -1;
+            p1->gameStatus = -1;
         case 2:
         case 11://draw cards
             draw(p1);

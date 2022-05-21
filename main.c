@@ -54,10 +54,10 @@ typedef struct Player
 typedef struct Building
 {
 	int buyPrice; // The price of occupying this place with a flag.
-	int buildPrice = 0.8 * buyPrice; // The price of building this flag to the structure.
-	int finalPrice = 1.5 * buyPrice + (1.5 * buildPrice) * condition ; // The eventual price of this land.
-	int fee = 0.5 * finalPrice // The fee that the opponent being through be supposed to pay. 
-	int buyPriceFromTheOpponent = 2 * finalPrice; // The price of this land buying from the opponent.
+	int buildPrice ; // The price of building this flag to the structure.
+	int finalPrice ; // The eventual price of this land.
+	int fee ; // The fee that the opponent being through be supposed to pay. 
+	int buyPriceFromTheOpponent ; // The price of this land buying from the opponent.
 	int condition; // The current status of the land, 0 is a flag, while 1 is structure.
 	int owner; // The land is occupied by whom.
 	
@@ -69,7 +69,6 @@ void printPlayerLocation(int p1Location, int p2Location);
 int main()
 {
 	char nameOfPlayer1[100], nameOfPlayer2[100];
-	int game_mode = 1;
 	char game_switch = "y";
 	printf("Please enter the name of player 1: ");
     	scanf("%s", nameOfPlayer1);
@@ -77,17 +76,19 @@ int main()
 	scanf("%s", nameOfPlayer2);
 	
 	Player p1 =
-    	{
-    		.money = 10000,
-    		.name = nameOfPlayer1,
-    		.location = 0
+	{
+		.money = 10000,
+		.name = nameOfPlayer1,
+		.location = 0,
+		.gameStatus = 0
 	};
 	
-	Player p2 = 
+	Player p2 =
 	{
 		.money = 10000,
 		.name = nameOfPlayer2,
-		.location = 0
+		.location = 0,
+		.gameStatus = 0
 	};
 	
 	printPlayerLocation(p1.location, p2.location);
@@ -96,19 +97,22 @@ int main()
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
 	printf("Whether to open the round?(print y=yes, n=no and end the game)");
 	while (scanf_c("%c\n", game_switch, 1) == "y") {
-		move(&p1);
-		printPlayerLocation(p1.location, p2.location);
-		printLand();
-		event(&p1);
-		printPlayerLocation(p1.location, p2.location);
-		printLand();
-		move(&p2);
-		printPlayerLocation(p1.location, p2.location);
-		printLand();
-		event(&p2);
-		printPlayerLocation(p1.location, p2.location);
-		printLand();
-
+		if (p1.gameStatus >= 0) {
+			move(&p1);
+			printPlayerLocation(p1.location, p2.location);
+			printLand();
+			event(&p1);
+			printPlayerLocation(p1.location, p2.location);
+			printLand();
+		}
+		if (p2.gameStatus>=0) {
+			move(&p2);
+			printPlayerLocation(p1.location, p2.location);
+			printLand();
+			event(&p2);
+			printPlayerLocation(p1.location, p2.location);
+			printLand();
+		}
 	}
 }
 
