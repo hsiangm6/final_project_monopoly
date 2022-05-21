@@ -16,10 +16,18 @@ void event(struct Player* p1){
     }
 }
 
-void draw(struct Player** p1){
-    card = rand() % 10;
+void draw(struct Player* p1){
+    card = rand() % 11;
     switch(card){
-        
+	case 0:
+	case 1:
+	case 2:
+		p1-> money += 1000 + card * 2000;
+	case 3:
+	case 4:
+	case 5:
+		p1-> money += 1000 - (card - 3) * 2000;
+	case 6:	    
     }
 }
 
