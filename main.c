@@ -30,9 +30,9 @@ int main()
 {
 	char nameOfPlayer1[100], nameOfPlayer2[100];
 	printf("Please enter the name of player 1: ");
-    scanf("%s", nameOfPlayer1);
+    scanf_s("%s", nameOfPlayer1,99);
     printf("Please enter the name of player 2: ");
-    scanf("%s", nameOfPlayer2);
+    scanf_s("%s", nameOfPlayer2,99);
 	
 	Player p1 =
     {
