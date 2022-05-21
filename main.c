@@ -49,6 +49,8 @@ typedef struct Player
 	char *name;
 	int location;
 	int gameStatus;
+	int player_number;
+	
 } Player;
 
 typedef struct Building
@@ -72,8 +74,8 @@ int main()
 	char nameOfPlayer1[100], nameOfPlayer2[100];
 	char game_switch = "y";
 	printf("Please enter the name of player 1: ");
-    scanf("%s", nameOfPlayer1);
-    printf("Please enter the name of player 2: ");
+    	scanf("%s", nameOfPlayer1);
+    	printf("Please enter the name of player 2: ");
 	scanf("%s", nameOfPlayer2);
 	
 	Player p1 =
@@ -81,7 +83,8 @@ int main()
 		.money = 10000,
 		.name = nameOfPlayer1,
 		.location = 0,
-		.gameStatus = 0
+		.gameStatus = 0,
+		.player_number = 1
 	};
 	
 	Player p2 =
@@ -89,7 +92,8 @@ int main()
 		.money = 10000,
 		.name = nameOfPlayer2,
 		.location = 0,
-		.gameStatus = 0
+		.gameStatus = 0,
+		.player_number = 2
 	};
 	
 	Building b[18] = 
