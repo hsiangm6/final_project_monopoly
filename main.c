@@ -65,6 +65,7 @@ typedef struct Building
 
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
+void buildingStructure(Building *b);
 
 int main()
 {
@@ -90,6 +91,28 @@ int main()
 		.location = 0,
 		.gameStatus = 0
 	};
+	
+	Building b[18] = 
+    	{
+		{0, -1},
+		{0, -1, 1000},
+		{0, -1},
+		{0, -1, 1400},
+		{0, -1, 1800},
+		{0, -1},
+		{0, -1, 2200},
+		{0, -1, 2600},
+		{0, -1, 3000},
+		{0, -1},
+		{0, -1, 3400},
+		{0, -1},
+		{0, -1, 3800},
+		{0, -1, 4200},
+		{0, -1},
+		{0, -1, 4600},
+		{0, -1, 5000},
+		{0, -1, 5400},
+   	};
 	
 	printPlayerLocation(p1.location, p2.location);
 	printLand();
@@ -155,4 +178,12 @@ void printPlayerLocation(int p1Location, int p2Location)
 	
 	landmark[p1Location * 5 + 2] = " 1";
 	landmark[p2Location * 5 + 4] = "2 ";
+}
+
+void buildingStructure(Building *b)
+{
+	b -> buildPrice = 0.8 * b -> buyPrice;
+	b -> finalPrice = 1.5 * b -> buyPrice + (1.5 * b -> buildPrice) * b -> condition;
+	b -> fee = 0.5 * b -> finalPrice;
+	b -> buyPriceFromTheOpponent = 2 * b -> finalPrice;
 }
