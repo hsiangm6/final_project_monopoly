@@ -26,7 +26,7 @@ void event(struct Player* p1,struct Building* b){
 }
 
 void draw(struct Player* p1){
-    card = rand() % 10;
+    card = rand() % 11;
     switch(card){
 	case 0:
 	case 1:
@@ -42,7 +42,7 @@ void draw(struct Player* p1){
 		break;
 	case 6:
 		target = rand()% 18;
-		printf("You get a ticket to Dokodemo Door, so you will be teleported to any location: %d", target);
+		printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d", target);
 		p1-> location = target;
 		event(p1);
 		break;
@@ -58,8 +58,18 @@ void draw(struct Player* p1){
 		p1-> location = 5;
 		event(p1);
 		break;
+	case 10:
+		target=0;
+		printf("You get a ticket to Dokodemo Door, please enter the location you want to go to (0 ~17)(only one chance to enter): "); 
+		scanf_d("%d",target);
+		if(target>=0 && target<=17){
+			printf("You will be teleported to specified location: %d", target);
+			p1-> location = target;
+			event(p1);
+		}
+		break; 
 	default:
-		;
+		break;
     }
 }
 
