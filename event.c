@@ -1,21 +1,27 @@
 #include "event.h"
 #include<stdlib.h>
+#include<time.h>
 void event(struct Player* p1,struct Building* b){
+	srand(time(NULL));
     switch(p1->location){
         case 5://jail
             p1->gameStatus = -1;
+			break;
         case 2:
         case 11://draw cards
             draw(p1);
+			break;
         case 9://casino
             casino(p1);
+			break;
         case 14://go to start
             p1->location = 0;
             p1->money += 10000;
-	case 0:
-	    ;
-	default:
-	    buy(p1,b);
+			break;
+		case 0:
+			break;
+		default:
+			buy(p1,b);
     }
 }
 
@@ -25,24 +31,33 @@ void draw(struct Player* p1){
 	case 0:
 	case 1:
 	case 2:
+		printf("The newly hired supervisor has good performance management, increasing the overall turnover by %d NT dollars.\n", 1000 + card * 2000);
 		p1-> money += 1000 + card * 2000;
+		break;
 	case 3:
 	case 4:
 	case 5:
-		p1-> money += 1000 - (card - 3) * 2000;
+		printf("You are unqualified by the health bureau, so you are fined %d NT dollars.\n", -(1000 + (card - 2) * 2000));
+		p1-> money -= (1000 + (card - 2) * 2000);
+		break;
 	case 6:
 		target = rand()% 18;
+		printf("You get a ticket to Dokodemo Door, so you will be teleported to any location: %d", target);
 		p1-> location = target;
 		event(p1);
+		break;
 	case 7:
 		p1-> location += 1;
 		event(p1);
+		break;
 	case 8:
 		p1-> location -= 1;
 		event(p1);
+		break;
 	case 9:
 		p1-> location = 5;
 		event(p1);
+		break;
 	default:
 		;
     }
