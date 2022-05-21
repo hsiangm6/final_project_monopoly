@@ -67,6 +67,8 @@ void printPlayerLocation(int p1Location, int p2Location);
 int main()
 {
 	char nameOfPlayer1[100], nameOfPlayer2[100];
+	int game_mode = 1;
+	char game_switch = "y";
 	printf("Please enter the name of player 1: ");
     	scanf("%s", nameOfPlayer1);
     	printf("Please enter the name of player 2: ");
@@ -90,6 +92,11 @@ int main()
 	printLand();
 	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
+	printf("Whether to open the round?(print y=yes, n=no and end the game)");
+	while (scanf_s("%c\n", game_switch, 1) == "y") {
+		move(&p1);
+		move(&p2);
+	}
 }
 
 void printLand()
