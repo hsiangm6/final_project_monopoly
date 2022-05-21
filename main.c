@@ -105,6 +105,9 @@ int main()
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
+		else {
+			continue;
+		}
 		if (p2.gameStatus>=0) {
 			move(&p2);
 			printPlayerLocation(p1.location, p2.location);
@@ -112,6 +115,9 @@ int main()
 			event(&p2);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
+		}
+		else {
+			continue;
 		}
 	}
 }
