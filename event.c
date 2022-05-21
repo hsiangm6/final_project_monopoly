@@ -1,6 +1,6 @@
 #include "event.h"
 #include<stdlib.h>
-void event(struct Player* p1){
+void event(struct Player* p1,struct Building* b){
     switch(p1->location){
         case 5://jail
             p1->gameStatus = -1;
@@ -15,7 +15,7 @@ void event(struct Player* p1){
 	case 0:
 	    ;
 	default:
-	    buy(p1);
+	    buy(p1,b);
     }
 }
 
