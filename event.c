@@ -30,26 +30,28 @@ void draw(struct Player* p1){
 	case 6:	    
     }
 }
+#include <stdio.h>
+#include <stdlib.h>
 
 void casino (struct player* p1){
 	char ch, ch2;
 	int coin, temp;
-	coin = rand () % 2;
-	printf ("Spend $2000.\n");
-	printf ("Select odds. (a)x2 (b)x3 (c)x4\n>");
+	coin = rand () % 2;	//random front back
+	printf ("Spend $2000 playing game.\n");
+	printf ("Input odds selection. (a)x2 (b)x3 (c)x4\n>");
 	scanf ("%c", &ch);
-	getchar();
-	printf ("Select front back. (f)front (b)back.\n>");
+	getchar();	//clean scanf
+	printf ("Input front back selection. (f)front (b)back.\n>");
 	scanf ("%c", &ch2);
-	if (ch2 == 102) temp = 0;
-	if (ch2 == 98) temp = 1;
+	if (ch2 == 102) temp = 0;	//front(f)
+	if (ch2 == 98) temp = 1;	//back(b)
 
 	if (temp == coin){
 		p1.money = p1.money +(2000*(ch-95));
-		printf ("You win!\nGet $%d.", (2000*(ch-95)));
+		printf ("You Win!\nGet $%d.", (2000*(ch-95)));
 	}
 	else {
-		p1.money = p1.money -2000;
-		printf ("You loose.\nLoose $2000.");
+		p1->money = p1->money -2000;
+		printf ("You Loose.\nLoose $2000.");
 	}
 }
