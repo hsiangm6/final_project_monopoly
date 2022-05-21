@@ -154,15 +154,121 @@ void casino (struct player* p1){
 }
 
 void buy(struct Player* p1, struct Building* b) {
+	char buy_switch = "y";
 	switch (b[p1->location]->condition) {
+		
+		//land
 		case -1:
-			printf("Are you going to buy this land?");
+			printf("Your current cash is %d.", p1->money);
+			printf("Are you going to buy the land?(only y/n):");
+			scanf("%c", buy_switch);
+			while (buy_switch != "y" && buy_switch != "n") {  //fool‑proof design
+				printf("Are you going to buy the land?(only y/n):");
+				scanf("%c", buy_switch);
+			}
+			if (buy_switch == "y") {   //buy the land
+				b[p1->location]->condition = 0;
+				p1->money -= b[p1->location]->buyPrice;
+				b[p1->location]->owner = p1->player_number;
+				printf("Your current cash is %d.", p1->money);
+			}
+			else {
+				printf("What a shame! You didn't buy the land\n")
+			}
 			break;
+
+		//flag
 		case 0:
+			//arrive the own flag
+			if (b[p1->location]->owner == p1->player_number) {  
 
+				//whether buy house on own flag
+				printf("Your current cash is %d.", p1->money);
+				printf("Are you going to buy the house?(only y/n):");
+				scanf("%c", buy_switch);
+
+				//fool‑proof design
+				while (buy_switch != "y" && buy_switch != "n") {  
+					printf("Are you going to buy the house?(only y/n):");
+					scanf("%c", buy_switch);
+				}
+
+				if (buy_switch == "y") {
+					b[p1->location]->condition = 1;
+					p1->money -= b[p1->location]->buildPrice;
+					printf("Your current cash is %d.", p1->money);
+				}
+				else {
+					printf("What a shame! You didn't buy the house\n");
+				}
+			}
+
+			//arrive someone else's flag
+			else {   
+				printf("Your current cash is %d.", p1->money);
+				printf("Are you going to buy the land of your opponent?(only y/n):");
+				scanf("%c", buy_switch);
+
+				//fool‑proof design
+				while (buy_switch != "y" && buy_switch != "n") {  
+					printf("Are you going to buy the land of your opponent?(only y/n):");
+					scanf("%c", buy_switch);
+				}
+
+				//buy someone else's flag
+				if (buy_switch == "y") {
+					b[p1->location]->owner = p1->player_number;
+					p1->money -= b[p1->location]->finalPrice;
+					printf("Your current cash is %d.", p1->money);
+				}
+
+				//pay the fee
+				else {
+					printf("What a shame! You didn't buy the house\n")
+					printf("Please pay the fee!\n");
+					p1->money -= b[p1->location]->fee;
+					printf("Your current cash is %d.", p1->money);
+				}
+			}
+			
 			break;
-		case 1:
 
+		//structure
+		case 1: 
+			//arrive the own estate
+			if (b[p1->location]->owner == p1->player_number) {
+				printf("You arrive your own estate!\n");
+				break;
+			}
+
+			//arrive someone else's structure
+			else {
+				printf("Your current cash is %d.", p1->money);
+				printf("Are you going to buy the estate?(only y/n):");
+				scanf("%c", buy_switch);
+
+				//fool‑proof design
+				while (buy_switch != "y" && buy_switch != "n") {
+					printf("Are you going to buy the estate?(only y/n):");
+					scanf("%c", buy_switch);
+				}
+
+				//buy someone else's land
+				if (buy_switch == "y") {
+					b[p1->location]->owner = p1->player_number;
+					p1->money -= b[p1->location]->finalPrice;
+					printf("Your current cash is %d.", p1->money);
+				}
+
+				//pay the fee
+				else {
+					printf("What a shame! You didn't buy the house\n");
+					printf("Please pay the fee!");
+					p1->money -= b[p1->location]->fee;
+					printf("Your current cash is %d.", p1->money);
+				}
+			}
 			break;
 	}
 }
+
