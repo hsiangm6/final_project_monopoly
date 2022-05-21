@@ -72,8 +72,8 @@ int main()
 	char nameOfPlayer1[100], nameOfPlayer2[100];
 	char game_switch = "y";
 	printf("Please enter the name of player 1: ");
-    	scanf("%s", nameOfPlayer1);
-    	printf("Please enter the name of player 2: ");
+    scanf("%s", nameOfPlayer1);
+    printf("Please enter the name of player 2: ");
 	scanf("%s", nameOfPlayer2);
 	
 	Player p1 =

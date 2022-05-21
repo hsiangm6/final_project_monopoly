@@ -98,3 +98,17 @@ void casino (struct player* p1){
 		printf ("You Loose.\nLoose $2000.");
 	}
 }
+
+void buy(struct Player* p1, struct Building* b) {
+	switch (b[p1->location]->condition) {
+		case -1:
+			printf("Are you going to buy this land?");
+			break;
+		case 0:
+
+			break;
+		case 1:
+
+			break;
+	}
+}
