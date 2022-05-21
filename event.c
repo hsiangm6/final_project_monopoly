@@ -1,6 +1,6 @@
 #include "event.h"
-#include<stdlib.h>
-#include<time.h>
+#include <stdlib.h>
+#include <time.h>
 void event(struct Player* p1,struct Building* b){
 	srand(time(NULL));
     switch(p1->location){
