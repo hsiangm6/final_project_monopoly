@@ -6,5 +6,5 @@ typedef struct Player
 	int money;
 	char *name;
 	int location;
-	
+	int gamestatus = 0;
 } Player;
