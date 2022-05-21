@@ -17,7 +17,7 @@ typedef struct Building
 	int owner; // The land is occupied by whom.
 } Building;
 
-void event(struct Player*);
+void event(struct Player*,struct Building*);
 void draw(struct Player*);
 void casino(struct Player*);
 void buy(struct Player*,struct Building*);
