@@ -25,3 +25,4 @@ void draw(struct Player*, struct Building*);
 void casino(struct Player*);
 void buy(struct Player*,struct Building*);
 void buildingStructure(struct Building*);
+
