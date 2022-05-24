@@ -22,7 +22,7 @@ void event(struct Player* player,struct Building* b){
 		case 0:
 			break;		
 		default:
-			buy(player,b);
+			buy(player,&b[player->location]);
 			break;
     }
 }
@@ -30,7 +30,7 @@ void event(struct Player* player,struct Building* b){
 void draw(struct Player* player, struct Building* b){
     int card = rand() % 11;
     int target = rand() % 18;
-	char trans[3]  = "";   //trans = string to int
+	char trans[3]  = "\0";   //trans = string to int
     switch(card){
 	case 0:
 	case 1:
@@ -94,10 +94,10 @@ void casino (struct Player* player){
 		coin = rand () % 2;	//random front back
 
 		ip = 1;
-		while (ip == 1){	//Fundai
-			puts ("Basic cost is $2000.\nPlease input odds selection. (a)x2 (b)x3 (c)x4\n>");
+		while (ip == 1){	//fool-proof
+			puts ("Basic cost is $2000.\nPlease input odds selection. (a)x1 (b)x2 (c)x3 (d)x4\n>");
 			gets(ch);
-			if (ch[0] <= 99 && ch[0] >= 97) ip = 0;
+			if (ch[0] <= 100 && ch[0] >= 97) ip = 0;
 			else {
 				puts ("Please enter correct content!\n");
 				ip=1;
@@ -105,7 +105,7 @@ void casino (struct Player* player){
 		}
 
 		ip =1;
-		while (ip == 1){	//Fundai
+		while (ip == 1){	//fool-proof
 			puts("Please input front back selection. (f)front (b)back.\n>");
 			gets(ch2);
 
@@ -124,18 +124,18 @@ void casino (struct Player* player){
 		}
 
 		if (temp == coin){
-			player->money += (2000*(ch[0] - 95));
-			printf ("You Win!\nGet $%d.\n", (2000*(ch[0] - 95)));
+			player->money += (2000*(ch[0] - 96));
+			printf ("You Win!\nGet $%d.\n", (2000*(ch[0] - 96)));
 		}
 		else {
-			player->money -= (2000*(ch[0] - 95));
-			printf ("You Loose.\nLoose $%d.\n", (2000*(ch[0] - 95)));
+			player->money -= (2000*(ch[0] - 96));
+			printf ("You Loose.\nLoose $%d.\n", (2000*(ch[0] - 96)));
 		}
 
 		if (round == 3) break;
 
 		ip =1;
-		while (ip =1){	//防呆
+		while (ip ==1){	//fool-proof
 			puts("Do you want to play again? Enter 'y' to continue, 'n' to leave the game.\n>");
 			gets(ch3);
 			if (ch3[0] == 121){
@@ -161,7 +161,7 @@ void buy(struct Player* player, struct Building* b) {
 		
 		//land
 		case -1:
-			printf("Your current cash is %d.", player->money);
+			printf("Your current cash is %d.\n", player->money);
 			puts("Are you going to buy the land?(only y/n):");
 			gets(buy_switch);
 			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') {  //fool‑proof design
@@ -173,6 +173,7 @@ void buy(struct Player* player, struct Building* b) {
 				printf("buy price:%d", b->buyPrice);
 				player->money -= b->buyPrice;
 				b->owner = player->player_number;
+				buildingStructure(b);
 				printf("Your current cash is %d.\n", player->money);
 			}
 			else {
@@ -199,16 +200,21 @@ void buy(struct Player* player, struct Building* b) {
 				if (buy_switch[0] == 'y') {
 					b->condition = 1;
 					player->money -= b->buildPrice;
+					buildingStructure(b);
 					printf("Your current cash is %d.", player->money);
 				}
 				else {
 					puts("What a shame! You didn't buy the house\n");
 				}
+
+
 			}
 
 			//arrive someone else's flag
 			else {   
 				printf("Your current cash is %d.", player->money);
+				printf("You are supposed to pay the fee: %d\n", b->fee);
+				player->money -= b->fee;
 				puts("Are you going to buy the land of your opponent?(only y/n):");
 				gets(buy_switch);
 
@@ -222,6 +228,7 @@ void buy(struct Player* player, struct Building* b) {
 				if (buy_switch[0] == 'y') {
 					b->owner = player->player_number;
 					player->money -= b->finalPrice;
+					player->money -= b->fee;
 					printf("Your current cash is %d.", player->money);
 				}
 
@@ -247,6 +254,8 @@ void buy(struct Player* player, struct Building* b) {
 			//arrive someone else's structure
 			else {
 				printf("Your current cash is %d.", player->money);
+				printf("You are supposed to pay the fee: %d\n", b->fee);
+				player->money -= b->fee;
 				puts("Are you going to buy the estate?(only y/n):");
 				gets(buy_switch);
 
@@ -273,5 +282,13 @@ void buy(struct Player* player, struct Building* b) {
 			}
 			break;
 	}
+}
+
+void buildingStructure(Building* b)
+{
+	b->buildPrice = 0.5 * b->buyPrice;
+	b->finalPrice = b->buyPrice + (b->buildPrice) * b->condition;
+	b->fee = 0.5 * b->finalPrice;
+	b->buyPriceFromTheOpponent = 2 * b->finalPrice;
 }
 

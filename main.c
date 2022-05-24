@@ -103,38 +103,34 @@ int main()
 	
 	printPlayerLocation(p1.location, p2.location);
 	printLand();
-	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
-	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
-	//Sleep(3000);
+	
+	Sleep(3000);
 	
 	//game start
 	
-	//puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 	while (game_switch[0] == 'y') {
 		
 		if (p1.gameStatus >= 0) {
 			move(&p1);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
-			event(&p1, &b[p1.location]);
+			event(&p1, b);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
 		else {
 			p1.gameStatus += 1;
-			continue;
 		}
 		if (p2.gameStatus >= 0) {
 			move(&p2);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
-			event(&p2, &b[p2.location]);
+			event(&p2, b);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
 		else {
 			p2.gameStatus += 1;
-			continue;
 		}
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
@@ -179,13 +175,7 @@ void printPlayerLocation(int p1Location, int p2Location)
 	landmark[p2Location * 5 + 4] = "2 ";
 }
 
-void buildingStructure(Building *b)
-{
-	b -> buildPrice = 0.5 * b -> buyPrice;
-	b -> finalPrice = b -> buyPrice + (b -> buildPrice) * b -> condition;
-	b -> fee = 0.5 * b -> finalPrice;
-	b -> buyPriceFromTheOpponent = 2 * b -> finalPrice;
-}
+
 
 void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
     int i, counter=0, player1Count=0, player2Count=0;

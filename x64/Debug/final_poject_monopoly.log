@@ -1,5 +1,2 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
-  event.c
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(6,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(71,7): warning C4013: 'gets' 未定義; 假設 extern 傳回整數
-  final_poject_monopoly.vcxproj -> C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe
+LINK : fatal error LNK1168: 無法開啟 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe 進行寫入
