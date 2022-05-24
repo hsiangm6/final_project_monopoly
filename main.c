@@ -48,7 +48,6 @@ char *landmark[] = {"      ", "      ", "  ", "  ", "  ",
 
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
-void buildingStructure(Building *b);
 void endGame(struct Player *p1, struct Player *p2,  struct Building *b);
 void move(struct Player *player);
 
