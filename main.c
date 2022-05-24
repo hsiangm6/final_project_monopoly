@@ -107,9 +107,10 @@ int main()
 	
 	//game start
 	
-	while (game_switch[0] == 'y') {
-		
-		if (p1.gameStatus >= 0) {
+	while (game_switch[0] == 'y') 
+	{
+		if (p1.gameStatus >= 0) 
+		{
 			move(&p1);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
@@ -117,10 +118,12 @@ int main()
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
-		else {
+		else 
+		{
 			p1.gameStatus += 1;
 		}
-		if (p2.gameStatus >= 0) {
+		if (p2.gameStatus >= 0) 
+		{
 			move(&p2);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
@@ -128,7 +131,8 @@ int main()
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
-		else {
+		else 
+		{
 			p2.gameStatus += 1;
 		}
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
@@ -178,35 +182,44 @@ void printPlayerLocation(int p1Location, int p2Location)
 
 void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
     int i, counter=0, player1Count=0, player2Count=0;
-    for (i=0; i<18; i++){
-        if (b[i].owner == 1) {
+    for (i=0; i<18; i++)
+    {
+        if (b[i].owner == 1) 
+	{
             player1Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
         }
-        else if (b[i].owner == 2){
+        else if (b[i].owner == 2)
+	{
             player2Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
         }
     }
-    if (player1Count > player2Count){
+    if (player1Count > player2Count)
+    {
         printf ("Congradulate!! Player %s wins the game.\n", p1->name);
         printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
-    else if (player1Count < player2Count){
+    else if (player1Count < player2Count)
+    {
         printf ("Congradulate!! Player %s wins the game.", p2->name);
         printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
-    else if (player1Count == player2Count){
+    else if (player1Count == player2Count)
+    {
         puts ("There is no winner in the game!");
     }
 }
 
-void move(struct Player *player) {
+void move(struct Player *player) 
+{
 	srand(time(NULL)); //set random number seeds
 	int diceFace = 1 + (rand() % 6); //roll the dice
 	printf("Your dice roll is %d.\n", diceFace);
 	player->location += diceFace;
 
-	if (player->location > 17) { //pass the start point
+	if (player->location > 17) //pass the start point
+	{ 
 		player->location -= 18;
 		player->money += 10000;
 	}
 }
+
