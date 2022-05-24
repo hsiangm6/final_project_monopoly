@@ -1,36 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
   event.c
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(6,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(13,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(13,9): warning C4024: 'draw': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(50,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(50,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(55,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(55,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(60,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(60,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(64,16): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(64,9): warning C4024: 'event': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(73,17): warning C4047: '函式': 'Player *' 與 'Player **' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(73,10): warning C4024: 'event': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(96,12): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(96,10): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(107,13): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(107,10): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(137,13): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(137,10): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(166,21): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(166,11): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(187,21): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(187,11): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(192,22): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(192,12): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(209,21): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(209,11): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(214,22): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(214,12): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(247,21): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(247,11): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(252,22): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(252,12): warning C4024: 'fgets': 型式和實質參數 1 不同的類型
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(71,7): warning C4013: 'gets' 未定義; 假設 extern 傳回整數
   final_poject_monopoly.vcxproj -> C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe
