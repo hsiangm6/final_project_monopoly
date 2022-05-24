@@ -210,15 +210,15 @@ void buy(struct Player* player, struct Building* b)
 			//arrive the own flag
 			if (b->owner == player->player_number) 
 			{
-				//whether buy house on own flag
+				//whether build structure on own flag
 				printf("Your current cash is %d.", player->money);
-				puts("Are you going to buy the house?(only y/n):");
+				puts("Are you going to build the structure?(only y/n):");
 				gets(buy_switch);
 
 				//fool‑proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
-					puts("Are you going to buy the house?(only y/n):");
+					puts("Are you going to build the structure?(only y/n):");
 					gets(buy_switch);
 				}
 
@@ -231,7 +231,7 @@ void buy(struct Player* player, struct Building* b)
 				}
 				else 
 				{
-					puts("What a shame! You didn't buy the house\n");
+					puts("What a shame! You didn't build the structure.\n");
 				}
 
 			}
@@ -242,13 +242,13 @@ void buy(struct Player* player, struct Building* b)
 				printf("Your current cash is %d.", player->money);
 				printf("You are supposed to pay the fee: %d\n", b->fee);
 				player->money -= b->fee;
-				puts("Are you going to buy the land of your opponent?(only y/n):");
+				puts("Are you going to buy the flag from your opponent?(only y/n):");
 				gets(buy_switch);
 
 				//fool‑proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
-					puts("Are you going to buy the land of your opponent?(only y/n):");
+					puts("Are you going to buy the flag from your opponent?(only y/n):");
 					gets(buy_switch);
 				}
 				
@@ -256,8 +256,7 @@ void buy(struct Player* player, struct Building* b)
 				if (buy_switch[0] == 'y') 
 				{
 					b->owner = player->player_number;
-					player->money -= b->finalPrice;
-					player->money -= b->fee;
+					player->money -= b->buyPriceFromTheOpponent;
 					printf("Your current cash is %d.", player->money);
 				}
 
@@ -265,8 +264,6 @@ void buy(struct Player* player, struct Building* b)
 				else 
 				{
 					puts("What a shame! You didn't buy the house\n");
-					puts("Please pay the fee!\n");
-					player->money -= b->fee;
 					printf("Your current cash is %d.", player->money);
 				}
 			}
@@ -287,13 +284,13 @@ void buy(struct Player* player, struct Building* b)
 				printf("Your current cash is %d.", player->money);
 				printf("You are supposed to pay the fee: %d\n", b->fee);
 				player->money -= b->fee;
-				puts("Are you going to buy the estate?(only y/n):");
+				puts("Are you going to buy the structure from your opponent?(only y/n):");
 				gets(buy_switch);
 
 				//fool‑proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
-					puts("Are you going to buy the estate?(only y/n):");
+					puts("Are you going to buy the structure from your opponent?(only y/n):");
 					gets(buy_switch);
 				}
 
@@ -301,7 +298,7 @@ void buy(struct Player* player, struct Building* b)
 				if (buy_switch[0] == 'y') 
 				{
 					b->owner = player->player_number;
-					player->money -= b->finalPrice;
+					player->money -= b->buyPriceFromTheOpponent;
 					printf("Your current cash is %d.", player->money);
 				}
 
@@ -309,8 +306,6 @@ void buy(struct Player* player, struct Building* b)
 				else 
 				{
 					puts("What a shame!You didn't buy the house\n");
-					puts("Please pay the fee!");
-					player->money -= b->fee;
 					printf("Your current cash is %d.", player->money);
 				}
 			}
