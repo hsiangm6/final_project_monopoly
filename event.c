@@ -1,5 +1,6 @@
 #include "event.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 void event(struct Player* player,struct Building* b){
 	srand(time(NULL));
@@ -64,8 +65,8 @@ void draw(struct Player* player, struct Building* b){
 		break;
 	case 10:
 		target=0;
-		printf("You get a ticket to Dokodemo Door, please enter the location you want to go to (0 ~17)(only one chance to enter): "); 
-		scanf_s("%d",target);
+		puts("You get a ticket to Dokodemo Door, please enter the location you want to go to (0 ~17)(only one chance to enter): "); 
+		scanf_s("%d", &target);
 		if(target>=0 && target<=17){
 			printf("You will be teleported to specified location: %d", target);
 			player-> location = target;
@@ -82,7 +83,7 @@ void casino (struct Player* player){
 	int coin, temp, round=1, playCondition=1, ip;
 	while (playCondition == 1){
 		if (player->money <2000){	//Do you have money?
-			printf ("You don\'t have enough money!");
+			puts ("You don\'t have enough money!");
 			break;
 		}
 
@@ -91,21 +92,19 @@ void casino (struct Player* player){
 
 		ip =1;
 		while (ip == 1){	//Fundai
-			printf ("Basic cost is $2000.\nPlease input odds selection. (a)x2 (b)x3 (c)x4\n>");
-			scanf_s ("%c", &ch);
-			getchar();	//clean scanf
+			puts ("Basic cost is $2000.\nPlease input odds selection. (a)x2 (b)x3 (c)x4\n>");
+			fgets(ch, 2, stdin);
 			if (ch <= 99 && ch >= 97) ip = 0;
 			else {
-				printf ("Please enter correct content!\n");
+				puts ("Please enter correct content!\n");
 				ip=1;
 			}
 		}
 
 		ip =1;
 		while (ip == 1){	//Fundai
-			printf ("Please input front back selection. (f)front (b)back.\n>");
-			scanf_s ("%c", &ch2);
-			getchar();	//clean scanf
+			puts("Please input front back selection. (f)front (b)back.\n>");
+			fgets(ch2, 2, stdin);
 
 			if (ch2 == 102){
 				temp = 0;
@@ -116,7 +115,7 @@ void casino (struct Player* player){
 				ip=0;
 			}	//back(b)
 			else {
-				printf ("Please enter correct content!\n");
+				puts("Please enter correct content!\n");
 				ip =1;
 			}
 		}
@@ -134,9 +133,8 @@ void casino (struct Player* player){
 
 		ip =1;
 		while (ip =1){	//防呆
-			printf ("Do you want to play again? Enter 'Y' to continue, 'n' to leave the game.\n>");
-			scanf_s ("%c", &ch3);
-			getchar();	//clean scanf
+			puts("Do you want to play again? Enter 'Y' to continue, 'n' to leave the game.\n>");
+			fgets(ch3, 2, stdin);
 			if (ch3 == 89){
 				playCondition = 1;
 				round ++;
@@ -147,7 +145,7 @@ void casino (struct Player* player){
 				ip =0;
 			}
 			else {
-				printf ("Please enter correct content!\n");
+				puts("Please enter correct content!\n");
 				ip =1;
 			}
 		}
@@ -161,11 +159,11 @@ void buy(struct Player* player, struct Building* b) {
 		//land
 		case -1:
 			printf("Your current cash is %d.", player->money);
-			printf("Are you going to buy the land?(only y/n):");
-			scanf_s("%c", buy_switch);
+			puts("Are you going to buy the land?(only y/n):");
+			fgets(buy_switch, 2, stdin);
 			while (buy_switch != 'y' && buy_switch != 'n') {  //fool‑proof design
-				printf("Are you going to buy the land?(only y/n):");
-				scanf_s("%c", buy_switch);
+				puts("Are you going to buy the land?(only y/n):");
+				fgets(buy_switch, 2, stdin);
 			}
 			if (buy_switch == 'y') {   //buy the land
 				b[player->location].condition = 0;
@@ -174,7 +172,7 @@ void buy(struct Player* player, struct Building* b) {
 				printf("Your current cash is %d.", player->money);
 			}
 			else {
-				printf("What a shame! You didn't buy the land\n");
+				puts("What a shame! You didn't buy the land\n");
 			}
 			break;
 
@@ -185,13 +183,13 @@ void buy(struct Player* player, struct Building* b) {
 
 				//whether buy house on own flag
 				printf("Your current cash is %d.", player->money);
-				printf("Are you going to buy the house?(only y/n):");
-				scanf_s("%c", buy_switch);
+				puts("Are you going to buy the house?(only y/n):");
+				fgets(buy_switch, 2, stdin);
 
 				//fool‑proof design
 				while (buy_switch != 'y' && buy_switch != 'n') {
-					printf("Are you going to buy the house?(only y/n):");
-					scanf_s("%c", buy_switch);
+					puts("Are you going to buy the house?(only y/n):");
+					fgets(buy_switch, 2, stdin);
 				}
 
 				if (buy_switch == 'y') {
@@ -200,20 +198,20 @@ void buy(struct Player* player, struct Building* b) {
 					printf("Your current cash is %d.", player->money);
 				}
 				else {
-					printf("What a shame! You didn't buy the house\n");
+					puts("What a shame! You didn't buy the house\n");
 				}
 			}
 
 			//arrive someone else's flag
 			else {   
 				printf("Your current cash is %d.", player->money);
-				printf("Are you going to buy the land of your opponent?(only y/n):");
-				scanf_s("%c", buy_switch);
+				puts("Are you going to buy the land of your opponent?(only y/n):");
+				fgets(buy_switch, 2, stdin);
 
 				//fool‑proof design
 				while (buy_switch != 'y' && buy_switch != 'n') {
-					printf("Are you going to buy the land of your opponent?(only y/n):");
-					scanf_s("%c", buy_switch);
+					puts("Are you going to buy the land of your opponent?(only y/n):");
+					fgets(buy_switch, 2, stdin);
 				}
 
 				//buy someone else's flag
@@ -225,8 +223,8 @@ void buy(struct Player* player, struct Building* b) {
 
 				//pay the fee
 				else {
-					printf("What a shame! You didn't buy the house\n");
-					printf("Please pay the fee!\n");
+					puts("What a shame! You didn't buy the house\n");
+					puts("Please pay the fee!\n");
 					player->money -= b[player->location].fee;
 					printf("Your current cash is %d.", player->money);
 				}
@@ -238,20 +236,20 @@ void buy(struct Player* player, struct Building* b) {
 		case 1: 
 			//arrive the own estate
 			if (b[player->location].owner == player->player_number) {
-				printf("You arrive your own estate!\n");
+				puts("You arrive your own estate!\n");
 				break;
 			}
 
 			//arrive someone else's structure
 			else {
 				printf("Your current cash is %d.", player->money);
-				printf("Are you going to buy the estate?(only y/n):");
-				scanf_s("%c", buy_switch);
+				puts("Are you going to buy the estate?(only y/n):");
+				fgets(buy_switch, 2, stdin);
 
 				//fool‑proof design
 				while (buy_switch != 'y' && buy_switch != 'n') {
-					printf("Are you going to buy the estate?(only y/n):");
-					scanf_s("%c", buy_switch);
+					puts("Are you going to buy the estate?(only y/n):");
+					fgets(buy_switch, 2, stdin);
 				}
 
 				//buy someone else's land
@@ -263,8 +261,8 @@ void buy(struct Player* player, struct Building* b) {
 
 				//pay the fee
 				else {
-					printf("What a shame! You didn't buy the house\n");
-					printf("Please pay the fee!");
+					puts("What a shame!You didn't buy the house\n");
+					puts("Please pay the fee!");
 					player->money -= b[player->location].fee;
 					printf("Your current cash is %d.", player->money);
 				}

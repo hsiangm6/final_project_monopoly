@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 #include "event.h"
 
 char *landmark[] = {"      ", "      ", "  ", "  ", "  ", 
@@ -53,12 +54,12 @@ void move(struct Player *player);
 
 int main()
 {
-	char nameOfPlayer1[100], nameOfPlayer2[100];
+	char nameOfPlayer1[101], nameOfPlayer2[101];
 	char game_switch = 'y';
-	printf("Please enter the name of player 1: ");
-    scanf_s("%s", nameOfPlayer1,99);
-    printf("Please enter the name of player 2: ");
-	scanf_s("%s", nameOfPlayer2,99);
+	puts("Please enter the name of player 1: ");
+    fgets(nameOfPlayer1,100,stdin);
+    puts("Please enter the name of player 2: ");
+	fgets(nameOfPlayer2,100,stdin);
 	
 	Player p1 =
 	{
@@ -104,6 +105,9 @@ int main()
 	printLand();
 	printf("Player1 %s now have %d money.\n", p1.name, p1.money);
 	printf("Player2 %s now have %d money.\n", p2.name, p2.money);
+	Sleep(3000);
+	
+	//game start
 	while (game_switch == 'y') {
 		
 		if (p1.gameStatus >= 0) {
@@ -128,14 +132,16 @@ int main()
 		else {
 			continue;
 		}
-		printf("Whether to open the round?(print y=yes, n=no and end the game)");
-		scanf_s("%c", &game_switch, 1);
+		puts("Whether to open the round?(print y=yes, n=no and end the game)");
+		fgets(game_switch, 2, stdin);
+
 	}
 }
 
 void printLand()
 {
 	//system("CLS");
+	puts("---------------");
 	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
         	landmark[91],
@@ -196,13 +202,14 @@ void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
         printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
     else if (player1Count == player2Count){
-        printf ("There is no winner in the game!");
+        puts ("There is no winner in the game!");
     }
 }
 
 void move(struct Player *player) {
 	srand(time(NULL)); //set random number seeds
 	int diceFace = 1 + (rand() % 6); //roll the dice
+	printf("Your dice roll is %d.\n", diceFace);
 	player->location += diceFace;
 
 	if (player->location > 17) { //pass the start point
