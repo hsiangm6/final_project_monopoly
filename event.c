@@ -160,7 +160,7 @@ void buy(struct Player* player, struct Building* b) {
 		case -1:
 			printf("Your current cash is %d.", player->money);
 			puts("Are you going to buy the land?(only y/n):");
-			fgets(buy_switch, 2, stdin);
+			fgets(&buy_switch, 2, stdin);
 			while (buy_switch != 'y' && buy_switch != 'n') {  //fool‑proof design
 				puts("Are you going to buy the land?(only y/n):");
 				fgets(buy_switch, 2, stdin);
