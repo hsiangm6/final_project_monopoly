@@ -4,7 +4,7 @@
 #include <time.h>
 void event(struct Player* player,struct Building* b){
 	srand(time(NULL));
-    switch(player->location){
+    	switch(player->location){
         case 5://jail
 			player->gameStatus = -1;
 			break;
@@ -29,7 +29,7 @@ void event(struct Player* player,struct Building* b){
 
 void draw(struct Player* player, struct Building* b){
     int card = rand() % 11;
-	int target = rand() % 18;
+    int target = rand() % 18;
     switch(card){
 	case 0:
 	case 1:
@@ -87,10 +87,10 @@ void casino (struct Player* player){
 			break;
 		}
 
-		printf ("Welcome to Casino Game. This round %d. \n", round);
+		printf ("Welcome to Casino Game. This is round %d. \n", round);
 		coin = rand () % 2;	//random front back
 
-		ip =1;
+		ip = 1;
 		while (ip == 1){	//Fundai
 			puts ("Basic cost is $2000.\nPlease input odds selection. (a)x2 (b)x3 (c)x4\n>");
 			fgets(ch, 2, stdin);
