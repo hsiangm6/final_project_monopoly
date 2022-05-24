@@ -171,7 +171,7 @@ void printPlayerLocation(int p1Location, int p2Location)
 
 void buildingStructure(Building *b)
 {
-	b -> buildPrice = 0.8 * b -> buyPrice;
+	b -> buildPrice = 0.5 * b -> buyPrice;
 	b -> finalPrice = 1.5 * b -> buyPrice + (1.5 * b -> buildPrice) * b -> condition;
 	b -> fee = 0.5 * b -> finalPrice;
 	b -> buyPriceFromTheOpponent = 2 * b -> finalPrice;
