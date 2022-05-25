@@ -3,77 +3,98 @@
 #include <time.h>
 #include <windows.h>
 #include "event.h"
+#include <string.h>
 
-char *landmark[200] = {"      ", "      ", "  ", "  ", "  ",
+char *landmark[200] = { "      ", "      ", "  ", "  ", "  ",
 
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "      ", "      ", "  ", "  ", "  ",
-		
-				    "******** ******** ******** ******** ******** ********", 
-					
-					"********",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"  ---------------------------------  ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",
-					
-					"                                     ",};
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"      ", "      ", "  ", "  ", "  ",
+			
+						"******** ******** ******** ******** ******** ********", 
+						
+						"********",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"  ---------------------------------  ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"  ---------------------------------  ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     ",
+						
+						"                                     "};
 
+char building[18][5] = {
+	" ",
+	"1!@!1",
+	" ",
+	"1#@#1",
+	"1$@$1",
+	" ",
+	"1%@%1",
+	"1^@^1",
+	"1&@&1",
+	" ",
+	"1*@*1",
+	" ",
+	"1?@?1",
+	"1/@\1",
+	" ",
+	"1\@/1",
+	"1w@w1",
+	"1s@s1"
+};
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
 void printPlayerInfo(Player *p1, Player *p2, Building *b);
@@ -144,7 +165,7 @@ int main()
 			move(&p1);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
-			event(&p1, b);
+			event(&p1, &p2, b, landmark, building);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
@@ -154,13 +175,14 @@ int main()
 		}
 		
 		Sleep(2000);
-		
+		//system("CLS");
+		puts("---------------");
 		if (p2.gameStatus >= 0)
 		{
 			move(&p2);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
-			event(&p2, b);
+			event(&p2, &p1, b, landmark, building);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
@@ -168,6 +190,8 @@ int main()
 		{
 			p2.gameStatus += 1;
 		}
+		//system("CLS");
+		puts("---------------");
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
 		Sleep(2000);
@@ -176,8 +200,7 @@ int main()
 
 void printLand()
 {
-	//system("CLS");
-	puts("---------------");
+	
 	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
     landmark[90],
@@ -214,8 +237,8 @@ void printPlayerLocation(int p1Location, int p2Location)
 
 
 void endGame(Player *p1, Player *p2,  Building *b)
-{
-    int i, counter=0, player1Count=0, player2Count=0;
+{   
+    int i, counter=0, player1Count=p1->money, player2Count=p2->money;
     for (i=0; i<18; i++)
     {
         if (b[i].owner == 1)
@@ -255,5 +278,12 @@ void move(Player *player)
 		player->location -= 18;
 		player->money += 10000;
 	}
+}
+
+void printPlayerInfo(Player* p1, Player* p2, Building* b)
+{
+	char str94[38] = "";
+	snprintf(str94, strlen(landmark[94]), "         Player 1: %-18s", p1->name);
+	landmark[94] = str94;
 }
 

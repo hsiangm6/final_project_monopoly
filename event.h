@@ -20,8 +20,8 @@ typedef struct
 
 } Building;
 
-void event(Player *player, Building *b);
-void draw(Player *player, Building *b);
+void event(Player* player, Player* receive, Building *b,char landmark[], char building[]);
+void draw(Player *player, Player* receive, Building *b, char landmark[], char building[]);
 void casino(Player *player);
-void buy(Player *player, Building *b);
+void buy(Player *player, Player* receive, Building *b, char landmark[], char building[]);
 void buildingStructure(Building *b);
