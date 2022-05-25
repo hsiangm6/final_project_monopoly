@@ -257,6 +257,3 @@ void move(Player *player)
 	}
 }
 
-
-
-
