@@ -25,3 +25,4 @@ void draw(Player *player, Player* receive, Building *b, char landmark[], char bu
 void casino(Player *player);
 void buy(Player *player, Player* receive, Building *b, char landmark[], char building[]);
 void buildingStructure(Building *b);
+
