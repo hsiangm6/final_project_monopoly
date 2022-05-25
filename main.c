@@ -308,7 +308,7 @@ void move(Player *player,Player *receive)
 {
 	size_t i = 0;
 	srand(time(NULL)); //set random number seeds
-	int diceFace = 1 + (rand() % 6); //roll the dice
+	diceFace = 1 + (rand() % 6); //roll the dice
 	printf("Your dice roll is %d.\n", diceFace);
 	for (i = 0; i < diceFace; i++) {
 		player->location += 1;
@@ -334,8 +334,20 @@ void printPlayerInfo(Player* p1, Player* p2, Building* b)
 	snprintf(str96, sizeof(str96), "            Money: %-18d", p1->money);
 	landmark[96] = str96;
 
-	static str98[38] = "";
-	snprintf(str98, sizeof(str98), "    It's round for: %-18d", p1->money);
+	char static str98[38] = "";
+	snprintf(str98, sizeof(str98), "    It's round for %-18s", playerNow == 1? p1->name : p2->name);
 	landmark[98] = str98;
+	
+	char static str100[38] = "";
+	snprintf(str100, sizeof(str100), " Your roll dice is %-18d", diceFace);
+	landmark[100] = str100;
+
+	char static str102[38] = "";
+	snprintf(str102, sizeof(str102), "         Player 1: %-18s", p2->name);
+	landmark[102] = str102;
+
+	char static str104[38] = "";
+	snprintf(str104, sizeof(str104), "            Money: %-18d", p2->money);
+	landmark[104] = str104;
 }
 
