@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void event(Player* player, Player* receive, Building *b, char landmark[], char building[])
+void event(Player* player, Player* receive, Building *b, char **landmark, char building[])
 {
 	srand(time(NULL));
     switch(player->location)
@@ -30,7 +30,7 @@ void event(Player* player, Player* receive, Building *b, char landmark[], char b
    	 }
 }
 
-void draw(Player *player, Player* receive, Building *b, char landmark[], char building[])
+void draw(Player *player, Player* receive, Building *b, char **landmark, char building[])
 {
 		int card = rand() % 11;
     	int target = rand() % 18;
@@ -185,7 +185,7 @@ void casino(Player *player)
 	}
 }
 
-void buy(Player *player, Player* receive, Building *b, char landmark[], char building[])
+void buy(Player *player, Player* receive, Building *b, char **landmark, char building[])
 {
 	char buy_switch[2] = "y";
 	switch (b->condition) 

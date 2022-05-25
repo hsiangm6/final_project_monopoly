@@ -89,9 +89,9 @@ char building[18][5] = {
 	"1*@*1",
 	" ",
 	"1?@?1",
-	"1/@\1",
+	"1/@\\1",
 	" ",
-	"1\@/1",
+	"1\\@/1",
 	"1w@w1",
 	"1s@s1"
 };
@@ -103,12 +103,16 @@ void move(Player *player);
 
 int main()
 {
-	char nameOfPlayer1[21], nameOfPlayer2[21]; // The maximum length of player's name is 20
+	char nameOfPlayer1[16], nameOfPlayer2[16]; // The maximum length of player's name is 15
 	char game_switch[2]= "y";
 	puts("Please enter the name of player 1: ");
-    fgets(nameOfPlayer1, 20, stdin);
+    fgets(nameOfPlayer1, 16, stdin);
+    if(nameOfPlayer1[strlen(nameOfPlayer1) - 1] == '\n')
+        nameOfPlayer1[strlen(nameOfPlayer1) - 1] = '\0';
     puts("Please enter the name of player 2: ");
-	fgets(nameOfPlayer2, 20, stdin);
+	fgets(nameOfPlayer2, 16, stdin);
+	if(nameOfPlayer2[strlen(nameOfPlayer2) - 1] == '\n')
+        nameOfPlayer2[strlen(nameOfPlayer2) - 1] = '\0';
 
 	Player p1 =
 	{
@@ -282,8 +286,18 @@ void move(Player *player)
 
 void printPlayerInfo(Player* p1, Player* p2, Building* b)
 {
-	char str94[38] = "";
-	snprintf(str94, strlen(landmark[94]), "         Player 1: %-18s", p1->name);
+	char static str94[38] = "";
+	snprintf(str94, sizeof(str94), "         Player 1: %-18s", p1->name);
 	landmark[94] = str94;
+	char static str96[38] = "";
+	snprintf(str96, sizeof(str96), "            Money: %-18d", p1->money);
+	landmark[96] = str96;
+	char static str102[38] = "";
+	snprintf(str102, sizeof(str102), "         Player 2: %-18s", p2->name);
+	landmark[102] = str102;
+	char static str104[38] = "";
+	snprintf(str104, sizeof(str104), "         Player 2: %-18d", p2->money);
+	landmark[104] = str104;
 }
+
 
