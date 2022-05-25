@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void event(Player* player, Player* receive, Building *b, char **landmark, char building[])
+void event(Player* player, Player* receive, Building *b, char **landmark, char **building)
 {
 	srand(time(NULL));
     switch(player->location)
@@ -30,7 +30,7 @@ void event(Player* player, Player* receive, Building *b, char **landmark, char b
    	 }
 }
 
-void draw(Player *player, Player* receive, Building *b, char **landmark, char building[])
+void draw(Player *player, Player* receive, Building *b, char **landmark, char **building)
 {
 		int card = rand() % 11;
     	int target = rand() % 18;
@@ -185,18 +185,18 @@ void casino(Player *player)
 	}
 }
 
-void buy(Player *player, Player* receive, Building *b, char **landmark, char building[])
+void buy(Player *player, Player* receive, Building *b, char **landmark, char **building)
 {
 	char buy_switch[2] = "y";
 	switch (b->condition) 
 	{
 		//land
 		case -1:
-			puts("Are you going to buy the land?(only y/n):");
+			puts("Are you going to buy the land? (only y/n):");
 			gets(buy_switch);
 			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') //fool?proof design
 			{  
-				puts("Are you going to buy the land?(only y/n):");
+				puts("Are you going to buy the land? (only y/n):");
 				gets(buy_switch);
 			}
 			if (buy_switch[0] == 'y') //buy the land
@@ -204,13 +204,13 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char bui
 				b->condition = 0;
 				printf("buy price:%d\n", b->buyPrice);
 				player->money -= b->buyPrice;
-				landmark[player->location] = player->player_number==1?"1>":"2>";
+				landmark[(player->location)*5] = player->player_number == 1? "  1>  " : "  2>  ";
 				b->owner = player->player_number;
 				buildingStructure(b);
 			}
 			else 
 			{
-				puts("What a shame! You didn't buy the land\n");
+				puts("What a shame! You didn't buy the land.\n");
 			}
 			break;
 
@@ -220,13 +220,13 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char bui
 			if (b->owner == player->player_number) 
 			{
 				//whether build structure on own flag
-				puts("Are you going to build the structure?(only y/n):");
+				puts("Are you going to build the structure? (only y/n):");
 				gets(buy_switch);
 
 				//fool?proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
-					puts("Are you going to build the structure?(only y/n):");
+					puts("Are you going to build the structure? (only y/n):");
 					gets(buy_switch);
 				}
 
@@ -234,7 +234,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char bui
 				{
 					b->condition = 1;
 					player->money -= b->buildPrice;
-					landmark[(player->location) * 5 + 1] = building[player->location];
+					landmark[(player->location)*5] = player->player_number == 1 ? building[player->location] : building[player->location+18];
 					buildingStructure(b);
 				}
 				else 
@@ -250,13 +250,13 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char bui
 				printf("You are supposed to pay the fee: %d\n", b->fee);
 				player->money -= b->fee;
 				receive->money += b->fee;
-				puts("Are you going to buy the flag from your opponent?(only y/n):");
+				puts("Are you going to buy the flag from your opponent? (only y/n):");
 				gets(buy_switch);
 
 				//fool?proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
-					puts("Are you going to buy the flag from your opponent?(only y/n):");
+					puts("Are you going to buy the flag from your opponent? (only y/n):");
 					gets(buy_switch);
 				}
 				
@@ -264,15 +264,14 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char bui
 				if (buy_switch[0] == 'y') 
 				{
 					b->owner = player->player_number;
-					landmark[player->location] = player->player_number == 1 ? "1>" : "2>";
+					landmark[(player->location)*5] = player->player_number == 1 ? "2>" : "1>";
 					player->money -= b->buyPriceFromTheOpponent;
 					receive->money += b->buyPriceFromTheOpponent;
 				}
 
-				//pay the fee
 				else 
 				{
-					puts("What a shame! You didn't buy the house\n");
+					puts("What a shame! You didn't buy the flag.\n");
 				}
 			}
 			break;
@@ -292,29 +291,28 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char bui
 				printf("You are supposed to pay the fee: %d\n", b->fee);
 				player->money -= b->fee;
 				receive->money += b->fee;
-				puts("Are you going to buy the structure from your opponent?(only y/n):");
+				puts("Are you going to buy the structure from your opponent? (only y/n):");
 				gets(buy_switch);
 
 				//fool-proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
-					puts("Are you going to buy the structure from your opponent?(only y/n):");
+					puts("Are you going to buy the structure from your opponent? (only y/n):");
 					gets(buy_switch);
 				}
 
-				//buy someone else's land
+				//buy someone else's structure
 				if (buy_switch[0] == 'y') 
 				{
 					b->owner = player->player_number;
 					player->money -= b->buyPriceFromTheOpponent;
 					receive->money+= b->buyPriceFromTheOpponent;
-					landmark[player->location] = player->player_number == 1 ? "1>" : "2>";
+					landmark[(player->location) * 5] = player->player_number == 1 ? building[player->location+18] : building[player->location];
 				}
 
-				//pay the fee
 				else 
 				{
-					puts("What a shame!You didn't buy the house\n");
+					puts("What a shame! You didn't buy the structure.\n");
 				}
 			}
 			break;

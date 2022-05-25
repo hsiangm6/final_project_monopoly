@@ -5,41 +5,41 @@
 #include "event.h"
 #include <string.h>
 
-char *landmark[200] = { "      ", "      ", "  ", "  ", "  ",
+char *landmark[200] = { "      ", " Go-> ", "  ", "  ", "  ",   //location: 0
 
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "China ", "  ", "  ", "  ",   //location: 1
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Chance", "  ", "  ", "  ",   //location: 2
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Korea ", "  ", "  ", "  ",   //location: 3
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "India ", "  ", "  ", "  ",   //location: 4
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", " Jail ", "  ", "  ", "  ",   //location: 5
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Arabia", "  ", "  ", "  ",   //location: 6
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Iraq  ", "  ", "  ", "  ",   //location: 7
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Turkey", "  ", "  ", "  ",   //location: 8
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Casino", "  ", "  ", "  ",   //location: 9
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Greece", "  ", "  ", "  ",   //location: 10
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Chance", "  ", "  ", "  ",   //location: 11
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Italy ", "  ", "  ", "  ",   //location: 12
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "France", "  ", "  ", "  ",   //location: 13
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Tunnel", "  ", "  ", "  ",   //location: 14
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "UK    ", "  ", "  ", "  ",   //location: 15
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "USA   ", "  ", "  ", "  ",   //location: 16
 			
-						"      ", "      ", "  ", "  ", "  ",
+						"      ", "Canada", "  ", "  ", "  ",   //location: 17
 			
 						"******** ******** ******** ******** ******** ********", 
 						
@@ -75,26 +75,49 @@ char *landmark[200] = { "      ", "      ", "  ", "  ", "  ",
 						
 						"                                     "};
 
-char building[18][5] = {
+char *building[36] = 
+{
 	" ",
-	"1!@!1",
+	"1!@@!1",
 	" ",
-	"1#@#1",
-	"1$@$1",
+	"1#@@#1",
+	"1$@@$1",
 	" ",
-	"1%@%1",
-	"1^@^1",
-	"1&@&1",
+	"1%@@%1",
+	"1^@@^1",
+	"1&@@&1",
 	" ",
-	"1*@*1",
+	"1*@@*1",
 	" ",
-	"1?@?1",
-	"1/@\\1",
+	"1?@@?1",
+	"1/@@\\1",
 	" ",
-	"1\\@/1",
-	"1w@w1",
-	"1s@s1"
+	"1\\@@/1",
+	"1w@@w1",
+	"1s@@s1", // 17
+	" ",
+	"2!@@!2",
+	" ",
+	"2#@@#2",
+	"2$@@$2",
+	" ",
+	"2%@@%2",
+	"2^@@^2",
+	"2&@@&2",
+	" ",
+	"2*@@*2",
+	" ",
+	"2?@@?2",
+	"2/@@\\2",
+	" ",
+	"2\\@@/2",
+	"2w@@w2",
+	"2s@@s2" //35
 };
+
+int diceFace = 0;
+int playerNow = 0;
+
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
 void printPlayerInfo(Player *p1, Player *p2, Building *b);
@@ -105,6 +128,8 @@ int main()
 {
 	char nameOfPlayer1[16], nameOfPlayer2[16]; // The maximum length of player's name is 15
 	char game_switch[2]= "y";
+	puts("Wellcome to the Smile Monopoly ! ");
+	Sleep(1000);
 	puts("Please enter the name of player 1: ");
     fgets(nameOfPlayer1, 16, stdin);
     if(nameOfPlayer1[strlen(nameOfPlayer1) - 1] == '\n')
@@ -154,22 +179,25 @@ int main()
 		{0, -1, 5400},
    	};
 
-	printPlayerInfo(&p1, &p2, b);
 	printPlayerLocation(p1.location, p2.location);
 	printLand();
-
 	Sleep(2000);
-
+	//system("CLS");
+	puts("---------------");
 	//game start
-
 	while (game_switch[0] == 'y')
 	{
+		playerNow = 1;
 		if (p1.gameStatus >= 0)
 		{
-			move(&p1);
+			move(&p1,&p2);
+			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 			event(&p1, &p2, b, landmark, building);
+
+			//system("CLS");
+			puts("---------------");
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
@@ -178,15 +206,20 @@ int main()
 			p1.gameStatus += 1;
 		}
 		
+		playerNow = 2;
 		Sleep(2000);
 		//system("CLS");
 		puts("---------------");
 		if (p2.gameStatus >= 0)
 		{
-			move(&p2);
+			move(&p2,&p1);
+			
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 			event(&p2, &p1, b, landmark, building);
+
+			//system("CLS");
+			puts("---------------");
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
@@ -198,7 +231,8 @@ int main()
 		puts("---------------");
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
-		Sleep(2000);
+		//system("CLS");
+		puts("---------------");
 	}
 }
 
@@ -266,22 +300,28 @@ void endGame(Player *p1, Player *p2,  Building *b)
     }
     else if (player1Count == player2Count)
     {
-        puts ("There is no winner in the game!");
+    puts ("There is no winner in the game!");
     }
 }
 
-void move(Player *player)
+void move(Player *player,Player *receive)
 {
+	size_t i = 0;
 	srand(time(NULL)); //set random number seeds
 	int diceFace = 1 + (rand() % 6); //roll the dice
 	printf("Your dice roll is %d.\n", diceFace);
-	player->location += diceFace;
-
-	if (player->location > 17) //pass the start point
-	{
-		player->location -= 18;
-		player->money += 10000;
+	for (i = 0; i < diceFace; i++) {
+		player->location += 1;
+		if (player->location > 17){ //pass the start point
+			player->location -= 18;
+			player->money += 10000;
+		}
+		printPlayerLocation(player->location, receive->location);
+		printLand();
+		Sleep(1000);
+		system("CLS");
 	}
+	
 }
 
 void printPlayerInfo(Player* p1, Player* p2, Building* b)
@@ -289,15 +329,13 @@ void printPlayerInfo(Player* p1, Player* p2, Building* b)
 	char static str94[38] = "";
 	snprintf(str94, sizeof(str94), "         Player 1: %-18s", p1->name);
 	landmark[94] = str94;
+   
 	char static str96[38] = "";
 	snprintf(str96, sizeof(str96), "            Money: %-18d", p1->money);
 	landmark[96] = str96;
-	char static str102[38] = "";
-	snprintf(str102, sizeof(str102), "         Player 2: %-18s", p2->name);
-	landmark[102] = str102;
-	char static str104[38] = "";
-	snprintf(str104, sizeof(str104), "         Player 2: %-18d", p2->money);
-	landmark[104] = str104;
-}
 
+	static str98[38] = "";
+	snprintf(str98, sizeof(str98), "    It's round for: %-18d", p1->money);
+	landmark[98] = str98;
+}
 
