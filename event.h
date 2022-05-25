@@ -25,3 +25,4 @@ void draw(Player *player, Building *b);
 void casino(Player *player);
 void buy(Player *player, Building *b);
 void buildingStructure(Building *b);
+
