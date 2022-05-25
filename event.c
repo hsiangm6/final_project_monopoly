@@ -320,3 +320,4 @@ void buildingStructure(Building *b)
 	b->fee = 0.5 * b->finalPrice;
 	b->buyPriceFromTheOpponent = 2 * b->finalPrice;
 }
+
