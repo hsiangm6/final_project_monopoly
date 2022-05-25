@@ -119,17 +119,20 @@ int diceFace = 0;
 int playerNow = 0;
 
 void printLand();
-void printPlayerLocation(int p1Location, int p2Location);
+void printPlayerLocation(Player* p1, Player* p2);
 void printPlayerInfo(Player *p1, Player *p2, Building *b);
 void endGame(Player *p1, Player *p2,  Building *b);
-void move(Player *player);
+void move(Player *player,Player *receive, Building *b);
 
 int main()
 {
 	char nameOfPlayer1[16], nameOfPlayer2[16]; // The maximum length of player's name is 15
 	char game_switch[2]= "y";
 	puts("Wellcome to the Smile Monopoly ! ");
+	puts("11111111111111111");
 	Sleep(1000);
+	puts("------------------");
+	//system("CLS");
 	puts("Please enter the name of player 1: ");
     fgets(nameOfPlayer1, 16, stdin);
     if(nameOfPlayer1[strlen(nameOfPlayer1) - 1] == '\n')
@@ -179,8 +182,10 @@ int main()
 		{0, -1, 5400},
    	};
 
-	printPlayerLocation(p1.location, p2.location);
+	printPlayerLocation(&p1, &p2);
 	printLand();
+	puts("2222222222222");
+
 	Sleep(2000);
 	//system("CLS");
 	puts("---------------");
@@ -190,15 +195,22 @@ int main()
 		playerNow = 1;
 		if (p1.gameStatus >= 0)
 		{
-			move(&p1,&p2);
+			srand(time(NULL)); //set random number seeds
+			diceFace = 1 + (rand() % 6); //roll the dice
 			printPlayerInfo(&p1, &p2, b);
-			printPlayerLocation(p1.location, p2.location);
+			printPlayerLocation(&p1, &p2);
+			printLand();
+			Sleep(2000);
+			move(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2, b);
+			printPlayerLocation(&p1, &p2);
 			printLand();
 			event(&p1, &p2, b, landmark, building);
 
 			//system("CLS");
 			puts("---------------");
-			printPlayerLocation(p1.location, p2.location);
+			printPlayerInfo(&p1, &p2, b);
+			printPlayerLocation(&p1, &p2);
 			printLand();
 		}
 		else
@@ -207,20 +219,28 @@ int main()
 		}
 		
 		playerNow = 2;
+		puts("22222222222222");
 		Sleep(2000);
 		//system("CLS");
 		puts("---------------");
 		if (p2.gameStatus >= 0)
 		{
-			move(&p2,&p1);
-			
-			printPlayerLocation(p1.location, p2.location);
+			srand(time(NULL)); //set random number seeds
+			diceFace = 1 + (rand() % 6); //roll the dice
+			printPlayerInfo(&p1, &p2, b);
+			printPlayerLocation(&p1, &p2);
+			printLand();
+			Sleep(2000);
+			move(&p2, &p1, b);
+			printPlayerInfo(&p1, &p2, b);
+			printPlayerLocation(&p1, &p2);
 			printLand();
 			event(&p2, &p1, b, landmark, building);
 
 			//system("CLS");
 			puts("---------------");
-			printPlayerLocation(p1.location, p2.location);
+			printPlayerInfo(&p1, &p2, b);
+			printPlayerLocation(&p1, &p2);
 			printLand();
 		}
 		else
@@ -238,7 +258,6 @@ int main()
 
 void printLand()
 {
-	
 	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
     landmark[90],
@@ -260,7 +279,7 @@ void printLand()
 	landmark[90]);
 }
 
-void printPlayerLocation(int p1Location, int p2Location)
+void printPlayerLocation(Player* p1, Player* p2)
 {
 	int i;
 	for(i=2; i<=87; i+=5)
@@ -268,8 +287,8 @@ void printPlayerLocation(int p1Location, int p2Location)
 	for(i=4; i<=89; i+=5)
 		landmark[i] = "  ";
 
-	landmark[p1Location * 5 + 2] = " 1";
-	landmark[p2Location * 5 + 4] = "2 ";
+	landmark[p1->location * 5 + 2] = " 1";
+	landmark[p2->location * 5 + 4] = "2 ";
 }
 
 
@@ -304,24 +323,27 @@ void endGame(Player *p1, Player *p2,  Building *b)
     }
 }
 
-void move(Player *player,Player *receive)
+void move(Player *player, Player *receive, Building *b)
 {
 	size_t i = 0;
-	srand(time(NULL)); //set random number seeds
-	diceFace = 1 + (rand() % 6); //roll the dice
-	printf("Your dice roll is %d.\n", diceFace);
+	
 	for (i = 0; i < diceFace; i++) {
 		player->location += 1;
 		if (player->location > 17){ //pass the start point
 			player->location -= 18;
 			player->money += 10000;
 		}
-		printPlayerLocation(player->location, receive->location);
+		
+		if(playerNow == 1)
+			printPlayerLocation(player, receive);
+		else
+			printPlayerLocation(receive, player);
 		printLand();
+		puts("111111111111111111");
 		Sleep(1000);
-		system("CLS");
+		puts("-------------------");
+		//system("CLS");
 	}
-	
 }
 
 void printPlayerInfo(Player* p1, Player* p2, Building* b)
@@ -335,7 +357,7 @@ void printPlayerInfo(Player* p1, Player* p2, Building* b)
 	landmark[96] = str96;
 
 	char static str98[38] = "";
-	snprintf(str98, sizeof(str98), "    It's round for %-18s", playerNow == 1? p1->name : p2->name);
+	snprintf(str98, sizeof(str98), "    It's round for %-18s", playerNow == 1 ? p1->name : p2->name);
 	landmark[98] = str98;
 	
 	char static str100[38] = "";
@@ -343,7 +365,7 @@ void printPlayerInfo(Player* p1, Player* p2, Building* b)
 	landmark[100] = str100;
 
 	char static str102[38] = "";
-	snprintf(str102, sizeof(str102), "         Player 1: %-18s", p2->name);
+	snprintf(str102, sizeof(str102), "         Player 2: %-18s", p2->name);
 	landmark[102] = str102;
 
 	char static str104[38] = "";
