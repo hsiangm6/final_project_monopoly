@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void event(struct Player* player,struct Building* b)
+void event(Player *player, Building *b)
 {
 	srand(time(NULL));
     	switch(player->location)
@@ -23,77 +23,77 @@ void event(struct Player* player,struct Building* b)
 			player->money += 10000;
 			break;
 		case 0:
-			break;		
+			break;
 		default:
 			buy(player,&b[player->location]);
 			break;
    	 }
 }
 
-void draw(struct Player* player, struct Building* b)
+void draw(Player *player, Building *b)
 {
-	int card = rand() % 11;
+		int card = rand() % 11;
     	int target = rand() % 18;
-	char trans[3]  = "\0";   //trans = string to int
+		char trans[3]  = "\0";   //trans = string to int
     	switch(card)
-	{
-		case 0:
-		case 1:
-		case 2:
-			printf("The newly hired supervisor has good performance management, increasing the overall turnover by %d NT dollars.\n", 1000 + card * 2000);
-			player-> money += 1000 + card * 2000;
-			break;
-		case 3:
-		case 4:
-		case 5:
-			printf("You are unqualified by the health bureau, so you are fined %d NT dollars.\n", -(1000 + (card - 2) * 2000));
-			player-> money -= (1000 + (card - 2) * 2000);
-			break;
-		case 6:
-			printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d\n", target);
-			player-> location = target;
-			event(player, b);
-			break;
-		case 7:
-			printf("You become an honorary real estate tycoon, so the people invite you to the next location: %d\n", player->location + 1);
-			player-> location += 1;
-			event(player, b);
-			break;
-		case 8:
-			printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", player->location - 1);
-			player-> location -= 1;
-			event(player, b);
-			break;
-		case 9:
-			printf("You bad. Go to jail.\n");
-			player-> location = 5;
-			event(player, b);
-			break;
-		case 10:
-			target=0;
-			puts("You get a ticket to Dokodemo Door, please enter the location you want to go to (0 ~17)(only one chance to enter): "); 
-			gets(trans);
-			target=atoi(trans);
-			if(target>=0 && target<=17)
-			{
-				printf("You will be teleported to specified location: %d\n", target);
+		{
+			case 0:
+			case 1:
+			case 2:
+				printf("The newly hired supervisor has good performance management, increasing the overall turnover by %d NT dollars.\n", 1000 + card * 2000);
+				player-> money += 1000 + card * 2000;
+				break;
+			case 3:
+			case 4:
+			case 5:
+				printf("You are unqualified by the health bureau, so you are fined %d NT dollars.\n", -(1000 + (card - 2) * 2000));
+				player-> money -= (1000 + (card - 2) * 2000);
+				break;
+			case 6:
+				printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d\n", target);
 				player-> location = target;
 				event(player, b);
-			}
-			break; 
-		default:
-			break;
-    }
+				break;
+			case 7:
+				printf("You become an honorary real estate tycoon, so the people invite you to the next location: %d\n", player->location + 1);
+				player-> location += 1;
+				event(player, b);
+				break;
+			case 8:
+				printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", player->location - 1);
+				player-> location -= 1;
+				event(player, b);
+				break;
+			case 9:
+				printf("You bad. Go to jail.\n");
+				player-> location = 5;
+				event(player, b);
+				break;
+			case 10:
+				target=0;
+				puts("You get a ticket to Dokodemo Door, please enter the location you want to go to (0 ~17)(only one chance to enter): ");
+				gets(trans);
+				target=atoi(trans);
+				if(target>=0 && target<=17)
+				{
+					printf("You will be teleported to specified location: %d\n", target);
+					player-> location = target;
+					event(player, b);
+				}
+				break;
+			default:
+				break;
+	    }
 }
 
-void casino (struct Player* player)
+void casino(Player *player)
 {
 	char ch[2] = "\0", ch2[2] = "\0", ch3[2] = "\0";
 	int coin=0, temp=0, round=1, playCondition=1, ip=0;
 	while (playCondition == 1)
 	{
 		if (player->money <2000) //Do you have enough money?
-		{	
+		{
 			puts ("You don\'t have enough money!");
 			break;
 		}
@@ -103,11 +103,11 @@ void casino (struct Player* player)
 
 		ip = 1;
 		while (ip == 1) //fool-proof
-		{	
+		{
 			puts ("Basic cost is $2000.\nPlease input odds selection. (a)x1 (b)x2 (c)x3 (d)x4\n>");
 			gets(ch);
 			if (ch[0] <= 100 && ch[0] >= 97) ip = 0;
-			else 
+			else
 			{
 				puts ("Please enter correct content!\n");
 				ip=1;
@@ -116,7 +116,7 @@ void casino (struct Player* player)
 
 		ip =1;
 		while (ip == 1) //fool-proof
-		{	
+		{
 			puts("Please input front back selection. (f)front (b)back.\n>");
 			gets(ch2);
 
@@ -130,7 +130,7 @@ void casino (struct Player* player)
 				temp = 1;
 				ip=0;
 			}	//back(b)
-			else 
+			else
 			{
 				puts("Please enter correct content!\n");
 				ip =1;
@@ -142,7 +142,7 @@ void casino (struct Player* player)
 			player->money += (2000*(ch[0] - 96));
 			printf ("You Win!\nGet $%d.\n", (2000*(ch[0] - 96)));
 		}
-		else 
+		else
 		{
 			player->money -= (2000*(ch[0] - 96));
 			printf ("You Loose.\nLoose $%d.\n", (2000*(ch[0] - 96)));
@@ -152,7 +152,7 @@ void casino (struct Player* player)
 
 		ip =1;
 		while (ip ==1) //fool-proof
-		{	
+		{
 			puts("Do you want to play again? Enter 'y' to continue, 'n' to leave the game.\n>");
 			gets(ch3);
 			if (ch3[0] == 121)
@@ -161,12 +161,12 @@ void casino (struct Player* player)
 				round ++;
 				ip =0;
 			}
-			else if (ch3[0] == 110) 
+			else if (ch3[0] == 110)
 			{
 				playCondition = 0;
 				ip =0;
 			}
-			else 
+			else
 			{
 				puts("Please enter correct content!\n");
 				ip =1;
@@ -175,7 +175,7 @@ void casino (struct Player* player)
 	}
 }
 
-void buy(struct Player* player, struct Building* b) 
+void buy(Player *player, Building *b)
 {
 	char buy_switch[2] = "y";
 	switch (b->condition) 
@@ -185,7 +185,7 @@ void buy(struct Player* player, struct Building* b)
 			printf("Your current cash is %d.\n", player->money);
 			puts("Are you going to buy the land?(only y/n):");
 			gets(buy_switch);
-			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') //fool‑proof design
+			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') //fool?proof design
 			{  
 				puts("Are you going to buy the land?(only y/n):");
 				gets(buy_switch);
@@ -215,7 +215,7 @@ void buy(struct Player* player, struct Building* b)
 				puts("Are you going to build the structure?(only y/n):");
 				gets(buy_switch);
 
-				//fool‑proof design
+				//fool?proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
 					puts("Are you going to build the structure?(only y/n):");
@@ -245,7 +245,7 @@ void buy(struct Player* player, struct Building* b)
 				puts("Are you going to buy the flag from your opponent?(only y/n):");
 				gets(buy_switch);
 
-				//fool‑proof design
+				//fool?proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
 					puts("Are you going to buy the flag from your opponent?(only y/n):");
@@ -287,7 +287,7 @@ void buy(struct Player* player, struct Building* b)
 				puts("Are you going to buy the structure from your opponent?(only y/n):");
 				gets(buy_switch);
 
-				//fool‑proof design
+				//fool?proof design
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
 					puts("Are you going to buy the structure from your opponent?(only y/n):");
@@ -313,11 +313,10 @@ void buy(struct Player* player, struct Building* b)
 	}
 }
 
-void buildingStructure(Building* b)
+void buildingStructure(Building *b)
 {
 	b->buildPrice = 0.5 * b->buyPrice;
 	b->finalPrice = b->buyPrice + (b->buildPrice) * b->condition;
 	b->fee = 0.5 * b->finalPrice;
 	b->buyPriceFromTheOpponent = 2 * b->finalPrice;
 }
-
