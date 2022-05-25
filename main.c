@@ -4,60 +4,91 @@
 #include <windows.h>
 #include "event.h"
 
-char *landmark[] = {"      ", "      ", "  ", "  ", "  ", 
+char *landmark[200] = {"      ", "      ", "  ", "  ", "  ",
 
-		    "      ", "      ", "  ", "  ", "  ",
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "      ", "      ", "  ", "  ", "  ",
+		
+				    "******** ******** ******** ******** ******** ********", 
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"********",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
-
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
-
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
-
-		    "      ", "      ", "  ", "  ", "  ",
+					"  ---------------------------------  ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
+					"                                     ",
 					
-		    "      ", "      ", "  ", "  ", "  ",
-				    
-                    "                                     ",
+					"                                     ",
 					
-		    "******** ******** ******** ******** ******** ********", "********                                     ********" };
+					"                                     ",
+					
+					"                                     ",
+					
+					"                                     ",};
 
 void printLand();
 void printPlayerLocation(int p1Location, int p2Location);
-void endGame(struct Player *p1, struct Player *p2,  struct Building *b);
-void move(struct Player *player);
+void printPlayerInfo(Player *p1, Player *p2, Building *b);
+void endGame(Player *p1, Player *p2,  Building *b);
+void move(Player *player);
 
 int main()
 {
-	char nameOfPlayer1[101], nameOfPlayer2[101];
-	char game_switch[2]="y";
+	char nameOfPlayer1[21], nameOfPlayer2[21]; // The maximum length of player's name is 20
+	char game_switch[2]= "y";
 	puts("Please enter the name of player 1: ");
-    	fgets(nameOfPlayer1, 100, stdin);
-    	puts("Please enter the name of player 2: ");
-	fgets(nameOfPlayer2, 100, stdin);
-	
+    fgets(nameOfPlayer1, 20, stdin);
+    puts("Please enter the name of player 2: ");
+	fgets(nameOfPlayer2, 20, stdin);
+
 	Player p1 =
 	{
 		.money = 10000,
@@ -66,7 +97,7 @@ int main()
 		.gameStatus = 0,
 		.player_number = 1
 	};
-	
+
 	Player p2 =
 	{
 		.money = 10000,
@@ -75,8 +106,8 @@ int main()
 		.gameStatus = 0,
 		.player_number = 2
 	};
-	
-	Building b[18] = 
+
+	Building b[18] =
     	{
 		{0, -1},
 		{0, -1, 1000},
@@ -97,17 +128,18 @@ int main()
 		{0, -1, 5000},
 		{0, -1, 5400},
    	};
-	
+
+	printPlayerInfo(&p1, &p2, b);
 	printPlayerLocation(p1.location, p2.location);
 	printLand();
-	
-	Sleep(3000);
-	
+
+	Sleep(2000);
+
 	//game start
-	
-	while (game_switch[0] == 'y') 
+
+	while (game_switch[0] == 'y')
 	{
-		if (p1.gameStatus >= 0) 
+		if (p1.gameStatus >= 0)
 		{
 			move(&p1);
 			printPlayerLocation(p1.location, p2.location);
@@ -116,11 +148,14 @@ int main()
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
-		else 
+		else
 		{
 			p1.gameStatus += 1;
 		}
-		if (p2.gameStatus >= 0) 
+		
+		Sleep(2000);
+		
+		if (p2.gameStatus >= 0)
 		{
 			move(&p2);
 			printPlayerLocation(p1.location, p2.location);
@@ -129,13 +164,13 @@ int main()
 			printPlayerLocation(p1.location, p2.location);
 			printLand();
 		}
-		else 
+		else
 		{
 			p2.gameStatus += 1;
 		}
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
-
+		Sleep(2000);
 	}
 }
 
@@ -145,23 +180,23 @@ void printLand()
 	puts("---------------");
 	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
-        landmark[91],
+    landmark[90],
 	landmark[0], landmark[5], landmark[10], landmark[15], landmark[20], landmark[25],
-        landmark[1], landmark[6], landmark[11], landmark[16], landmark[21], landmark[26],
-        landmark[2], landmark[3], landmark[4], landmark[7], landmark[8], landmark[9], landmark[12], landmark[13], landmark[14], landmark[17], landmark[18], landmark[19], landmark[22], landmark[23], landmark[24], landmark[27], landmark[28], landmark[29],
-	landmark[91]);
+    landmark[1], landmark[6], landmark[11], landmark[16], landmark[21], landmark[26],
+    landmark[2], landmark[3], landmark[4], landmark[7], landmark[8], landmark[9], landmark[12], landmark[13], landmark[14], landmark[17], landmark[18], landmark[19], landmark[22], landmark[23], landmark[24], landmark[27], landmark[28], landmark[29],
+	landmark[90]);
 
-   	printf("%s\n*%s*%s*%s*\n*%s*%s*%s*\n*%s%s%s*%s*%s%s%s*\n%s\n", landmark[92], landmark[85], landmark[90], landmark[30], landmark[86], landmark[90], landmark[31], landmark[87], landmark[88], landmark[89], landmark[90], landmark[32], landmark[33], landmark[34], landmark[92]);
-    	printf("%s\n*%s*%s*%s*\n*%s*%s*%s*\n*%s%s%s*%s*%s%s%s*\n%s\n", landmark[92], landmark[80], landmark[90], landmark[35], landmark[81], landmark[90], landmark[36], landmark[82], landmark[83], landmark[84], landmark[90], landmark[37], landmark[38], landmark[39], landmark[92]);
-    	printf("%s\n*%s*%s*%s*\n*%s*%s*%s*\n*%s%s%s*%s*%s%s%s*\n%s\n", landmark[92], landmark[75], landmark[90], landmark[40], landmark[76], landmark[90], landmark[41], landmark[77], landmark[78], landmark[79], landmark[90], landmark[42], landmark[43], landmark[44], landmark[92]);
+   	printf("%s%s%s\n*%s*%s*%s*\n*%s*%s*%s*\n*%s%s%s*%s*%s%s%s*\n%s%s%s\n", landmark[91], landmark[92], landmark[91], landmark[85], landmark[93], landmark[30], landmark[86], landmark[94], landmark[31], landmark[87], landmark[88], landmark[89], landmark[95], landmark[32], landmark[33], landmark[34], landmark[91], landmark[96], landmark[91]);
+    printf("%s%s%s\n*%s*%s*%s*\n*%s*%s*%s*\n*%s%s%s*%s*%s%s%s*\n%s%s%s\n", landmark[91], landmark[97], landmark[91], landmark[80], landmark[98], landmark[35], landmark[81], landmark[99], landmark[36], landmark[82], landmark[83], landmark[84], landmark[100], landmark[37], landmark[38], landmark[39], landmark[91], landmark[101], landmark[91]);
+    printf("%s%s%s\n*%s*%s*%s*\n*%s*%s*%s*\n*%s%s%s*%s*%s%s%s*\n%s%s%s\n", landmark[91], landmark[102], landmark[91], landmark[75], landmark[103], landmark[40], landmark[76], landmark[104], landmark[41], landmark[77], landmark[78], landmark[79], landmark[105], landmark[42], landmark[43], landmark[44], landmark[91], landmark[106], landmark[91]);
 
-    	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
+    printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
-        landmark[91],
+    landmark[90],
 	landmark[70], landmark[65], landmark[60], landmark[55], landmark[50], landmark[45],
-        landmark[71], landmark[66], landmark[61], landmark[56], landmark[51], landmark[46],
-        landmark[72], landmark[73], landmark[74], landmark[67], landmark[68], landmark[69], landmark[62], landmark[63], landmark[64], landmark[57], landmark[58], landmark[59], landmark[52], landmark[53], landmark[54], landmark[47], landmark[48], landmark[49],
-	landmark[91]);
+    landmark[71], landmark[66], landmark[61], landmark[56], landmark[51], landmark[46],
+    landmark[72], landmark[73], landmark[74], landmark[67], landmark[68], landmark[69], landmark[62], landmark[63], landmark[64], landmark[57], landmark[58], landmark[59], landmark[52], landmark[53], landmark[54], landmark[47], landmark[48], landmark[49],
+	landmark[90]);
 }
 
 void printPlayerLocation(int p1Location, int p2Location)
@@ -171,18 +206,19 @@ void printPlayerLocation(int p1Location, int p2Location)
 		landmark[i] = "  ";
 	for(i=4; i<=89; i+=5)
 		landmark[i] = "  ";
-	
+
 	landmark[p1Location * 5 + 2] = " 1";
 	landmark[p2Location * 5 + 4] = "2 ";
 }
 
 
 
-void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
+void endGame(Player *p1, Player *p2,  Building *b)
+{
     int i, counter=0, player1Count=0, player2Count=0;
     for (i=0; i<18; i++)
     {
-        if (b[i].owner == 1) 
+        if (b[i].owner == 1)
 	{
             player1Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
         }
@@ -207,7 +243,7 @@ void endGame(struct Player *p1, struct Player *p2,  struct Building *b){
     }
 }
 
-void move(struct Player *player) 
+void move(Player *player)
 {
 	srand(time(NULL)); //set random number seeds
 	int diceFace = 1 + (rand() % 6); //roll the dice
@@ -215,9 +251,12 @@ void move(struct Player *player)
 	player->location += diceFace;
 
 	if (player->location > 17) //pass the start point
-	{ 
+	{
 		player->location -= 18;
 		player->money += 10000;
 	}
 }
+
+
+
 
