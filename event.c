@@ -108,7 +108,7 @@ void casino(Player *player)
 			gets(ch);
 			if (ch[0] <= 100 && ch[0] >= 97){
 				ip = 0;
-				if (player->money <(2000*ch[0])){	//Do you have money?
+				if (player->money < (2000*(ch[0]-96))){	//Do you have money?
 					puts ("You don\'t have enough money!");
 					ip=1;
 				}
@@ -264,7 +264,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				if (buy_switch[0] == 'y') 
 				{
 					b->owner = player->player_number;
-					landmark[(player->location)*5] = player->player_number == 1 ? "2>" : "1>";
+					landmark[(player->location)*5] = player->player_number == 1 ? "  1>  " : "  2>  ";
 					player->money -= b->buyPriceFromTheOpponent;
 					receive->money += b->buyPriceFromTheOpponent;
 				}
@@ -307,7 +307,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 					b->owner = player->player_number;
 					player->money -= b->buyPriceFromTheOpponent;
 					receive->money+= b->buyPriceFromTheOpponent;
-					landmark[(player->location) * 5] = player->player_number == 1 ? building[player->location+18] : building[player->location];
+					landmark[(player->location) * 5] = player->player_number == 1 ? building[player->location] : building[player->location+18];
 				}
 
 				else 
