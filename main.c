@@ -348,28 +348,28 @@ void move(Player *player, Player *receive, Building *b)
 
 void printPlayerInfo(Player* p1, Player* p2, Building* b)
 {
-	char static str94[38] = "";
-	snprintf(str94, sizeof(str94), "         Player 1: %-18s", p1->name);
-	landmark[94] = str94;
+	char static str93[38] = "";
+	snprintf(str93, sizeof(str93), "         Player 1: %-18s", p1->name);
+	landmark[93] = str93;
    
-	char static str96[38] = "";
-	snprintf(str96, sizeof(str96), "            Money: %-18d", p1->money);
-	landmark[96] = str96;
+	char static str95[38] = "";
+	snprintf(str95, sizeof(str95), "            Money: %-18d", p1->money);
+	landmark[95] = str95;
 
 	char static str98[38] = "";
 	snprintf(str98, sizeof(str98), "    It's round for %-18s", playerNow == 1 ? p1->name : p2->name);
 	landmark[98] = str98;
 	
 	char static str100[38] = "";
-	snprintf(str100, sizeof(str100), " Your roll dice is %-18d", diceFace);
+	snprintf(str100, sizeof(str100), "         Your roll dice is %-10d", diceFace);
 	landmark[100] = str100;
 
-	char static str102[38] = "";
-	snprintf(str102, sizeof(str102), "         Player 2: %-18s", p2->name);
-	landmark[102] = str102;
+	char static str103[38] = "";
+	snprintf(str103, sizeof(str103), "         Player 2: %-18s", p2->name);
+	landmark[103] = str103;
 
-	char static str104[38] = "";
-	snprintf(str104, sizeof(str104), "            Money: %-18d", p2->money);
-	landmark[104] = str104;
+	char static str105[38] = "";
+	snprintf(str105, sizeof(str105), "            Money: %-18d", p2->money);
+	landmark[105] = str105;
 }
 
