@@ -5,6 +5,7 @@
 #include "event.h"
 #include <string.h>
 
+//map coordinates and content
 char *landmark[200] = { "      ", " Go-> ", "  ", "  ", "  ",   //location: 0
 
 						"      ", "China ", "  ", "  ", "  ",   //location: 1
@@ -45,37 +46,38 @@ char *landmark[200] = { "      ", " Go-> ", "  ", "  ", "  ",   //location: 0
 						
 						"********",
 						
-						"                                     ",
+						"                                     ",   //status bar 1
 						
-						"                                     ",
+						"                                     ",   //status bar 2
 						
-						"                                     ",
+						"                                     ",   //status bar 3
 						
-						"                                     ",
+						"                                     ",   //status bar 4
 						
-						"                                     ",
+						"                                     ",   //status bar 5
 						
-						"  ---------------------------------  ",
+						"  ---------------------------------  ",   //status bar 6
 						
-						"                                     ",
+						"                                     ",   //status bar 7
 						
-						"                                     ",
+						"                                     ",   //status bar 8
 						
-						"                                     ",
+						"                                     ",   //status bar 9
 						
-						"  ---------------------------------  ",
+						"  ---------------------------------  ",   //status bar 10
 						
-						"                                     ",
+						"                                     ",   //status bar 11
 						
-						"                                     ",
+						"                                     ",   //status bar 12
 						
-						"                                     ",
+						"                                     ",   //status bar 13
 						
-						"                                     ",
+						"                                     ",   //status bar 14
 						
-						"                                     "};
+						"                                     "};  //status bar 15
 
-char *building[36] = 
+//structure mark
+char *building[36] =    
 {
 	" ",
 	"1!@@!1",
@@ -115,24 +117,28 @@ char *building[36] =
 	"2s@@s2" //35
 };
 
-int diceFace = 0;
-int playerNow = 0;
+int diceFace = 0;   //the number of dice used to know the step player moved 
+int playerNow = 1;   //current operated player
 
-void printLand();
-void printPlayerLocation(Player* p1, Player* p2);
-void printPlayerInfo(Player *p1, Player *p2, Building *b);
-void endGame(Player *p1, Player *p2,  Building *b);
-void move(Player *player,Player *receive, Building *b);
+
+void printLand();   //map
+void printPlayerLocation(Player* p1, Player* p2);   //the players' position on the map
+void printPlayerInfo(Player *p1, Player *p2);   //change the row of the player status in the middle of the map
+void endGame(Player *p1, Player *p2,  Building *b);   //the last player asset settlement in the game
+void move(Player *player,Player *receive);   //according to the player in this segment, deciding whose location will change
 
 int main()
 {
 	char nameOfPlayer1[16], nameOfPlayer2[16]; // The maximum length of player's name is 15
-	char game_switch[2]= "y";
-	puts("Wellcome to the Smile Monopoly ! ");
-	puts("11111111111111111");
-	Sleep(1000);
-	puts("------------------");
-	//system("CLS");
+	char game_switch[2]= "y";   //ask player whether the game is continue
+	int dice_switch = 0;   //ask player whether they roll the dice
+	int event_switch = 0;   //check player whether they know the information
+	
+	puts("Welcome to the Smile Monopoly ! ");
+	Sleep(3000);
+	system("CLS");
+	
+	//enter the name of the player
 	puts("Please enter the name of player 1: ");
     fgets(nameOfPlayer1, 16, stdin);
     if(nameOfPlayer1[strlen(nameOfPlayer1) - 1] == '\n')
@@ -141,25 +147,29 @@ int main()
 	fgets(nameOfPlayer2, 16, stdin);
 	if(nameOfPlayer2[strlen(nameOfPlayer2) - 1] == '\n')
         nameOfPlayer2[strlen(nameOfPlayer2) - 1] = '\0';
-
+	system("CLS");
+	
+	//player 1 structure
 	Player p1 =
 	{
-		.money = 10000,
-		.name = nameOfPlayer1,
-		.location = 0,
-		.gameStatus = 0,
-		.player_number = 1
+		.money = 15000,   //current cash
+		.name = nameOfPlayer1,   //player name
+		.location = 0,   //player location
+		.gameStatus = 0,   //check whether the player is in jail now
+		.player_number = 1,   //player number
+		.debt_counter=0   //count the number of rounds in which the player is continuously in debt 
 	};
-
+	//player 2 structure
 	Player p2 =
 	{
-		.money = 10000,
+		.money = 15000,
 		.name = nameOfPlayer2,
 		.location = 0,
 		.gameStatus = 0,
-		.player_number = 2
+		.player_number = 2,
+		.debt_counter = 0
 	};
-
+	//building structure
 	Building b[18] =
     	{
 		{0, -1},
@@ -181,86 +191,182 @@ int main()
 		{0, -1, 5000},
 		{0, -1, 5400},
    	};
-
+	//print the state, map, location of the player 
+	printPlayerInfo(&p1, &p2, b);
 	printPlayerLocation(&p1, &p2);
 	printLand();
-	puts("2222222222222");
 
-	Sleep(2000);
-	//system("CLS");
-	puts("---------------");
+	Sleep(1000);
+	system("CLS");
+
 	//game start
 	while (game_switch[0] == 'y')
 	{
+		//player 1 round
 		playerNow = 1;
-		if (p1.gameStatus >= 0)
-		{
-			srand(time(NULL)); //set random number seeds
-			diceFace = 1 + (rand() % 6); //roll the dice
+		if (p1.gameStatus >= 0)   //prevent the player is in jail now
+		{	
+			diceFace = 0;
+			printPlayerInfo(&p1, &p2, b);   //update status bar
+			printLand();   //print land
+
+			//user experience
+			puts("Press space to roll the dice.\n");
+			while (dice_switch = getch()) {   //fool-proof
+				if (dice_switch == ' ') {
+					srand(time(NULL)); //set random number seeds
+					diceFace = 1 + (rand() % 6); //roll the dice
+					break;
+				}
+			}
+			system("CLS");
+			//print current map ,status, location
 			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(&p1, &p2);
 			printLand();
-			Sleep(2000);
-			move(&p1, &p2, b);
+			Sleep(1000);
+
+			//move and update layout
+			move(&p1, &p2);
 			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(&p1, &p2);
 			printLand();
+
+			//execute related activity in monopoly
 			event(&p1, &p2, b, landmark, building);
 
-			//system("CLS");
-			puts("---------------");
+			//check player whether they know the information
+			puts("Press space to continue...\n");
+			while (event_switch = getch()) {
+				if (event_switch == ' ') {
+					break;
+				}
+			}
+			system("CLS");
+			//update the layout
 			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 		}
+		//pleyer is in jail now and will be released next round
 		else
 		{
 			p1.gameStatus += 1;
 		}
-		
+
+		//count the number of rounds in which the player is continuously in debt
+		if (p1.money < 0) {
+			p1.debt_counter++;
+		}
+		else{
+			p1.debt_counter=0;
+		}
+
+		//player 2 round
 		playerNow = 2;
-		puts("22222222222222");
-		Sleep(2000);
-		//system("CLS");
-		puts("---------------");
-		if (p2.gameStatus >= 0)
+		Sleep(500);
+		system("CLS");
+
+		if (p2.gameStatus >= 0)  //prevent player is in jail now
 		{
-			srand(time(NULL)); //set random number seeds
-			diceFace = 1 + (rand() % 6); //roll the dice
+			diceFace = 0;
+
+			//update layout
+			printPlayerInfo(&p1, &p2, b);
+			printLand();
+
+			//user experience
+			puts("Press space to roll the dice.\n");
+			while (dice_switch = getch()) {
+				if (dice_switch == ' ') {
+					srand(time(NULL)); //set random number seeds
+					diceFace = 1 + (rand() % 6); //roll the dice
+					break;
+				}
+			}
+			system("CLS");
+
+			//update layout
 			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(&p1, &p2);
 			printLand();
-			Sleep(2000);
-			move(&p2, &p1, b);
+			Sleep(1000);
+
+			//move location
+			move(&p2, &p1);
+
+			//update layout
 			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(&p1, &p2);
 			printLand();
+
+			//execute the activity in monopoly
 			event(&p2, &p1, b, landmark, building);
 
-			//system("CLS");
-			puts("---------------");
+			//check player whether they know the information
+			puts("Press space to continue...\n");
+			while (event_switch = getch()) {
+				if (event_switch == ' ') {
+					break;
+				}
+			}
+			//update layout
+			system("CLS");
 			printPlayerInfo(&p1, &p2, b);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 		}
+		//pleyer is in jail now and will be released next round
 		else
 		{
 			p2.gameStatus += 1;
 		}
-		//system("CLS");
-		puts("---------------");
+		system("CLS");
+		//update layout
+		printPlayerInfo(&p1, &p2, b);
+		printLand();
+		//count the number of rounds in which the player is continuously in debt
+		if (p2.money < 0) {
+			p2.debt_counter++;
+		}
+		else {
+			p2.debt_counter = 0;
+		}
+		//if the number of rounds in which the player is continuously in debt is 3, the player lose
+		if (p1.debt_counter == 3) {
+			printf("Sorry, %s is in a manner of continuous liability.\n", p1.name);
+			printf("Congratulate!! Player %s wins the game.\n", p2.name);
+			break;
+		}
+		else if (p2.debt_counter == 3) {
+			printf("Sorry, %s is in a manner of continuous liability.\n", p2.name);
+			printf("Congratulate!! Player %s wins the game.\n", p1.name);
+			break;
+		}
+		//prevent ask whether players open the next round repeatedly when players are all in jail
+		if (p1.gameStatus < 0 && p2.gameStatus < 0) {
+			system("CLS");
+			continue;
+		}
+		//open the next round or end the game
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
-		if (game_switch == 'n') {
+		while (game_switch[0] != 'y') {
+			puts("Whether open the next round? (Enter y to continue, n to end the game.)");
+			gets(game_switch);
+		}
+		system("CLS");
+
+		//know who is winner
+		if (game_switch[0] == 'n') {
 			endGame(&p1, &p2, b);
 			break;
 		}
-		//system("CLS");
-		puts("---------------");
 	}
 }
 
-void printLand()
+//map
+void printLand()   
 {
 	printf("%s\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s* *%s* *%s* *%s* *%s* *%s*\n*%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s* *%s%s%s*\n%s\n",
 
@@ -283,6 +389,7 @@ void printLand()
 	landmark[90]);
 }
 
+//the players' position on the map
 void printPlayerLocation(Player* p1, Player* p2)
 {
 	int i;
@@ -296,7 +403,7 @@ void printPlayerLocation(Player* p1, Player* p2)
 }
 
 
-
+//the last player asset settlement in the game
 void endGame(Player *p1, Player *p2,  Building *b)
 {   
     int i, counter=0, player1Count=p1->money, player2Count=p2->money;
@@ -304,54 +411,58 @@ void endGame(Player *p1, Player *p2,  Building *b)
     {
         if (b[i].owner == 1)
 	{
-            player1Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
+            player1Count += b[i].finalPrice;   //player1Count = cash + building price
         }
         else if (b[i].owner == 2)
 	{
-            player2Count += (1.5 * b[i].buyPrice + (1.5 * b[i].buildPrice) * b[i].condition);
+            player2Count += b[i].finalPrice;   //player2Count = cash + building price
         }
     }
+	//player 1 win
     if (player1Count > player2Count)
     {
-        printf ("Congradulate!! Player %s wins the game.\n", p1->name);
+        printf ("Congratulate!! Player %s wins the game.\n", p1->name);
         printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
+	//player 2 win
     else if (player1Count < player2Count)
     {
-        printf ("Congradulate!! Player %s wins the game.", p2->name);
+        printf ("Congratulate!! Player %s wins the game.\n", p2->name);
         printf ("Toltal asset: %s: %d, %s: %d", p1->name, player1Count, p2->name, player2Count);
     }
+	//tie
     else if (player1Count == player2Count)
     {
-    puts ("There is no winner in the game!");
+    puts ("Draw ! Everyone is winner in the game!");
     }
 }
 
-void move(Player *player, Player *receive, Building *b)
-{
-	size_t i = 0;
+//according to the player in this segment, deciding whose location will change.
+void move(Player *now_player, Player *wait_player) {  //move(moving player,waiting player, 
+	size_t i = 0; //for-loop count
 	
-	for (i = 0; i < diceFace; i++) {
-		player->location += 1;
-		if (player->location > 17){ //pass the start point
-			player->location -= 18;
-			player->money += 10000;
+	system("CLS");   //clear up the layout
+	for (i = 0; i < diceFace; i++) {   //change the player's location step by step.
+		now_player->location += 1;
+		if (now_player->location > 17){   //pass the start point
+			now_player->location -= 18;
+			now_player->money += 10000;
 		}
-		
+		//In order to match the input settings of printPlayerLocation(p1,p2)
 		if(playerNow == 1)
-			printPlayerLocation(player, receive);
+			printPlayerLocation(now_player, wait_player);   //printPlayerLocation(p1,p2)
 		else
-			printPlayerLocation(receive, player);
-		printLand();
-		puts("111111111111111111");
-		Sleep(1000);
-		puts("-------------------");
-		//system("CLS");
+			printPlayerLocation(wait_player, now_player);   //printPlayerLocation(p1,p2)
+		printLand();   //print the map and the player status
+		Sleep(750);
+		system("CLS");
 	}
 }
 
-void printPlayerInfo(Player* p1, Player* p2, Building* b)
+//change the row of the player status in the middle of the map
+void printPlayerInfo(Player* p1, Player* p2)
 {
+	//player 1
 	char static str93[38] = "";
 	snprintf(str93, sizeof(str93), "         Player 1: %-18s", p1->name);
 	landmark[93] = str93;
@@ -360,6 +471,7 @@ void printPlayerInfo(Player* p1, Player* p2, Building* b)
 	snprintf(str95, sizeof(str95), "            Money: %-18d", p1->money);
 	landmark[95] = str95;
 
+	//show whose turn + the number of move steps rolled by the dice 
 	char static str98[38] = "";
 	snprintf(str98, sizeof(str98), "    It's round for %-18s", playerNow == 1 ? p1->name : p2->name);
 	landmark[98] = str98;
@@ -368,6 +480,7 @@ void printPlayerInfo(Player* p1, Player* p2, Building* b)
 	snprintf(str100, sizeof(str100), "         Your roll dice is %-10d", diceFace);
 	landmark[100] = str100;
 
+	//player 2
 	char static str103[38] = "";
 	snprintf(str103, sizeof(str103), "         Player 2: %-18s", p2->name);
 	landmark[103] = str103;

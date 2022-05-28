@@ -3,77 +3,104 @@
 #include <stdio.h>
 #include <time.h>
 
+//activity in monopoly
 void event(Player* player, Player* receive, Building *b, char **landmark, char **building)
 {
+	int draw_switch = 0;
 	srand(time(NULL));
     switch(player->location)
 	{
 	case 5://jail
 		player->gameStatus = -1;
+		puts("Welcome to the jail !\nYou are forbidden to roll the dice for one round !\n");
 		break;
 	case 2:
 	case 11://draw cards
+		puts("Press space to draw the card...\n");
+		while (draw_switch = getch()) {
+			if (draw_switch == ' ') {
+				break;
+			}
+		}
 		draw(player, receive, b, landmark, building);
 		break;
 	case 9://casino
 		casino(player);
 			break;
 	case 14://go to start
+		puts("You find a tunnel back to the \"Go\"");
 		player->location = 0;
 		player->money += 10000;
 		break;
 	case 0:
 		break;
-	default:
+	default: //buy estate or pay the fee
 		buy(player,receive, &b[player->location], landmark, building);
 		break;
    	 }
 }
 
+//chance
 void draw(Player *player, Player* receive, Building *b, char **landmark, char **building)
 {
-		int card = rand() % 11;
-    	int target = rand() % 18;
+		int card = rand() % 11;  // 11 cards
+    	int target = rand() % 18;   //delivery location
 		char trans[3]  = "";   //trans = string to int
     	switch(card)
 		{
+			//plus money
 			case 0:
 			case 1:
 			case 2:
 				printf("The newly hired supervisor has good performance management, increasing the overall turnover by %d NT dollars.\n", 1000 + card * 2000);
 				player-> money += 1000 + card * 2000;
 				break;
+
+			//minus money
 			case 3:
 			case 4:
 			case 5:
-				printf("You are unqualified by the health bureau, so you are fined %d NT dollars.\n", -(1000 + (card - 2) * 2000));
-				player-> money -= (1000 + (card - 2) * 2000);
+				printf("You are unqualified by the health bureau, so you are fined %d NT dollars.\n", -(1000 + (card - 3) * 2000));
+				player-> money -= (1000 + (card - 3) * 2000);
 				break;
+			//deliver to random location
 			case 6:
 				printf("You get a ticket to broken Dokodemo Door, so you will be teleported to random location: %d\n", target);
+				//pass the start
+				if (target < player->location) {
+					player->money += 10000;
+				}
 				player-> location = target;
 				event(player, receive, b, landmark, building);
 				break;
+			//player location + 1
 			case 7:
 				printf("You become an honorary real estate tycoon, so the people invite you to the next location: %d\n", player->location + 1);
 				player-> location += 1;
 				event(player, receive, b, landmark, building);
 				break;
+			//player location -1
 			case 8:
 				printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", player->location - 1);
 				player-> location -= 1;
 				event(player, receive, b,landmark, building);
 				break;
+			//do to jail
 			case 9:
 				printf("You bad. Go to jail.\n");
 				player-> location = 5;
 				event(player, receive, b, landmark, building);
 				break;
+			//go to the location player points
 			case 10:
 				target=0;
 				puts("You get a ticket to Dokodemo Door, please enter the location you want to go to (0 ~17)(only one chance to enter): ");
 				gets(trans);
 				target=atoi(trans);
+				//pass the start
+				if (target < player->location) {
+					player->money += 10000;
+				}
 				if(target>=0 && target<=17)
 				{
 					printf("You will be teleported to specified location: %d\n", target);
@@ -86,6 +113,7 @@ void draw(Player *player, Player* receive, Building *b, char **landmark, char **
 	    }
 }
 
+//casino game
 void casino(Player *player)
 {
 	char ch[2] = "\0", ch2[2] = "\0", ch3[2] = "\0";
@@ -113,9 +141,11 @@ void casino(Player *player)
 					ip=1;
 				}
 			}
-			else if (ch[0] ==101) {
+			//exit the game
+			else if (ch[0] ==101) { 
 				ip = 2;
 			}
+			//enter incorrect answer
 			else {
 				puts ("Please enter correct content!");
 				ip=1;
@@ -146,18 +176,19 @@ void casino(Player *player)
 				ip =1;
 			}
 		}
-
+		//win(the casino)
 		if (temp == coin)
 		{
 			player->money += (2000*(ch[0] - 96));
 			printf ("You Win!\nGet $%d.\n", (2000*(ch[0] - 96)));
 		}
+		//lose(the casino) 
 		else
 		{
 			player->money -= (2000*(ch[0] - 96));
 			printf ("You Loose.\nLoose $%d.\n", (2000*(ch[0] - 96)));
 		}
-
+		//up to 3 rounds
 		if (round == 3) break;
 
 		ip =1;
@@ -185,26 +216,31 @@ void casino(Player *player)
 	}
 }
 
+//purchase behaviour
 void buy(Player *player, Player* receive, Building *b, char **landmark, char **building)
 {
-	char buy_switch[2] = "y";
-	switch (b->condition) 
+	char buy_switch[2] = "y";   //the switch know whether the player buys the items
+	switch (b->condition) //condition: -1=land, 0=flag, 1=structure
 	{
 		//land
 		case -1:
+			printf("buy price:%d\n", b->buyPrice);
 			puts("Are you going to buy the land? (only y/n):");
 			gets(buy_switch);
-			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') //fool?proof design
+
+			//fool?proof design
+			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 			{  
 				puts("Are you going to buy the land? (only y/n):");
 				gets(buy_switch);
 			}
-			if (buy_switch[0] == 'y') //buy the land
+
+			//buy the land
+			if (buy_switch[0] == 'y') 
 			{   
 				b->condition = 0;
-				printf("buy price:%d\n", b->buyPrice);
 				player->money -= b->buyPrice;
-				landmark[(player->location)*5] = player->player_number == 1? "  1>  " : "  2>  ";
+				landmark[(player->location)*5] = player->player_number == 1? "  1>  " : "  2>  ";   //set up th flag
 				b->owner = player->player_number;
 				buildingStructure(b);
 			}
@@ -220,10 +256,11 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 			if (b->owner == player->player_number) 
 			{
 				//whether build structure on own flag
+				printf("building price:%d\n", b->buildPrice);
 				puts("Are you going to build the structure? (only y/n):");
 				gets(buy_switch);
 
-				//fool?proof design
+				//fool-proof
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
 					puts("Are you going to build the structure? (only y/n):");
@@ -234,7 +271,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				{
 					b->condition = 1;
 					player->money -= b->buildPrice;
-					landmark[(player->location)*5] = player->player_number == 1 ? building[player->location] : building[player->location+18];
+					landmark[(player->location)*5] = player->player_number == 1 ? building[player->location] : building[player->location+18];   //set up structure
 					buildingStructure(b);
 				}
 				else 
@@ -250,10 +287,11 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				printf("You are supposed to pay the fee: %d\n", b->fee);
 				player->money -= b->fee;
 				receive->money += b->fee;
-				puts("Are you going to buy the flag from your opponent? (only y/n):");
+
+				printf("Are you going to buy the flag from your opponent for %d? (only y/n):", b->buyPriceFromTheOpponent);
 				gets(buy_switch);
 
-				//fool?proof design
+				//fool-proof 
 				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
 				{
 					puts("Are you going to buy the flag from your opponent? (only y/n):");
@@ -291,7 +329,9 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				printf("You are supposed to pay the fee: %d\n", b->fee);
 				player->money -= b->fee;
 				receive->money += b->fee;
-				puts("Are you going to buy the structure from your opponent? (only y/n):");
+
+				//The ability to purchase other's structures
+				/*printf("Are you going to buy the structure from your opponent for %d? (only y/n):", b->buyPriceFromTheOpponent);
 				gets(buy_switch);
 
 				//fool-proof design
@@ -313,16 +353,17 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				else 
 				{
 					puts("What a shame! You didn't buy the structure.\n");
-				}
+				}*/
 			}
 			break;
 	}
 }
 
+//Real estate price of building structure, market value, toll, purchace price of other's flag
 void buildingStructure(Building *b)
 {
-	b->buildPrice = 0.5 * b->buyPrice;
-	b->finalPrice = b->buyPrice + (b->buildPrice) * b->condition;
-	b->fee = 0.5 * b->finalPrice;
-	b->buyPriceFromTheOpponent = 2 * b->finalPrice;
+	b->buildPrice = 0.5 * b->buyPrice;   //price of building structure
+	b->finalPrice = b->buyPrice + (b->buildPrice) * b->condition;   //market value
+	b->fee = 0.5 * b->finalPrice;   //toll
+	b->buyPriceFromTheOpponent = 1.5 * b->finalPrice;   //purchace price of other's flag
 }

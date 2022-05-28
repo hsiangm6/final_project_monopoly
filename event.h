@@ -1,11 +1,11 @@
 typedef struct
 {
-	int money;
-	char *name;
-	int location;
-	int gameStatus;
-	int player_number;
-
+	int money;   //current cash
+	char *name;   //player name
+	int location;   //player location
+	int gameStatus;   //check whether the player is in jail now
+	int player_number;   //player number
+	int debt_counter;   //count the number of rounds in which the player is continuously in debt
 } Player;
 
 typedef struct
@@ -20,9 +20,9 @@ typedef struct
 
 } Building;
 
-void event(Player* player, Player* receive, Building *b,char **landmark, char **building);
-void draw(Player *player, Player* receive, Building *b, char **landmark, char **building);
-void casino(Player *player);
-void buy(Player *player, Player* receive, Building *b, char **landmark, char **building);
-void buildingStructure(Building *b);
+void event(Player* player, Player* receive, Building *b,char **landmark, char **building);   //activity in monopoly
+void draw(Player *player, Player* receive, Building *b, char **landmark, char **building);   //chance
+void casino(Player *player);   //casino game
+void buy(Player *player, Player* receive, Building *b, char **landmark, char **building);   //purchase behaviour
+void buildingStructure(Building *b);   //Real estate purchase price, market value, toll
 

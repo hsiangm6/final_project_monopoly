@@ -1,16 +1,25 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
+  event.c
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(10,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(20,29): warning C4013: 'getch' 未定義; 假設 extern 傳回整數
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(98,9): warning C4013: 'gets' 未定義; 假設 extern 傳回整數
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(365,22): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(367,15): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(368,35): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
   main.c
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(94,2): warning C4129: '@': 無法辨識的字元逸出序列
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(172,31): warning C4047: '函式': 'char *' 與 'char *[200]' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(172,23): warning C4024: 'event': 型式和實質參數 4 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(172,41): warning C4047: '函式': 'char *' 與 'char [18][5]' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(172,33): warning C4024: 'event': 型式和實質參數 5 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(189,31): warning C4047: '函式': 'char *' 與 'char *[200]' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(189,23): warning C4024: 'event': 型式和實質參數 4 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(189,41): warning C4047: '函式': 'char *' 與 'char [18][5]' 間接取值的層級不同
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(189,33): warning C4024: 'event': 型式和實質參數 5 不同的類型
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(200,7): warning C4013: 'gets' 未定義; 假設 extern 傳回整數
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(250,29): warning C4244: '+=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(254,29): warning C4244: '+=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(275,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(195,28): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(210,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(215,30): warning C4013: 'getch' 未定義; 假設 extern 傳回整數
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(217,16): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(224,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(231,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(247,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(275,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(282,16): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(290,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(299,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(315,30): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(326,29): warning C4020: 'printPlayerInfo': 實質參數太多
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\main.c(348,7): warning C4013: 'gets' 未定義; 假設 extern 傳回整數
+  正在產生程式碼...
   final_poject_monopoly.vcxproj -> C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe
