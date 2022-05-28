@@ -251,6 +251,10 @@ int main()
 		puts("---------------");
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
+		if (game_switch == 'n') {
+			endGame(&p1, &p2, b);
+			break;
+		}
 		//system("CLS");
 		puts("---------------");
 	}
