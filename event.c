@@ -138,10 +138,10 @@ void casino (Player *player)
 			puts ("Please enter correct content!");
 			gets(odds);
 		}
-		if (odds[0] != 101){	//Do you have money?
-			while (player->money < (2000*(odds[0]-96))){
+		if (odds[0] != 101){	
+			while (player->money < (2000*(odds[0]-96))){  //Do you have money?
 				puts ("You don\'t have enough money!");
-				puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
+				puts ("Please input your odds selection again. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
 				gets(odds);
 			}
 		}
