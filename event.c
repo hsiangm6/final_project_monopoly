@@ -116,7 +116,7 @@ void draw(Player *player, Player* receive, Building *b, char **landmark, char **
 //casino game
 void casino (Player *player)
 {
-	char ch[2] = "\0", ch2[2] = "\0", ch3[2] = "\0";
+	char odds[2] = "\0", coinStatus[2] = "\0", gameStatus[2] = "\0";
 	int coin=0, FrontBack=0, round=1, playCondition=1;
 	while (playCondition == 1)
 	{
@@ -130,82 +130,67 @@ void casino (Player *player)
 		printf ("This is round %d. Your current money is $%d.\n", round, player->money);
 		coin = rand () % 2;	//random front back
 
-		while (1){	//fool-proof
-			puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-			gets(ch);
-			if (ch[0] <= 100 && ch[0] >= 97){
-				if (player->money < (2000*(ch[0]-96))){	//Do you have money?
-					puts ("You don\'t have enough money!");
-				}
-				else break;
-			}
-			//exit the game
-			else if (ch[0] ==101) { 
-				round = 3;
-				break;
-			}
-			//enter incorrect answer
-			else {
-				puts ("Please enter correct content!");
-			}
-		}
 
-		if (round == 3) break;
-
-		while (1) //fool-proof
+		puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
+		gets(odds);
+		while (odds[0] > 101 || odds[0] < 97 )	//fool-proof
 		{
-			puts("Please input front back selection. (f)front (b)back.");
-			gets(ch2);
-
-			if (ch2[0] == 102)
-			{
-				FrontBack = 0;
-				break;
-			}	//front(f)
-			else if (ch2[0] == 98)
-			{
-				FrontBack = 1;
-				break;;
-			}	//back(b)
-			else
-			{
-				puts("Please enter correct content!");
+			puts ("Please enter correct content!");
+			gets(odds);
+		}
+		if (odds[0] != 101){	//Do you have money?
+			while (player->money < (2000*(odds[0]-96))){
+				puts ("You don\'t have enough money!");
+				puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
+				gets(odds);
 			}
 		}
+		else break;		//exit the game
+		
+		puts("Please input front back selection. (f)front (b)back.");
+		gets(coinStatus);
+		while (coinStatus[0] != 102 && coinStatus[0] != 98)	//fool-proof
+		{
+			puts("Please enter correct content!");
+			gets(coinStatus);
+		}
+		if (coinStatus[0] == 102) FrontBack = 0;
+		else if (coinStatus[0] == 98) FrontBack = 1;
+
 		//win(the casino)
 		if (FrontBack == coin)
 		{
-			player->money += (2000*(ch[0] - 96));
-			printf ("You Win $%d!\n", (2000*(ch[0] - 96)));
+			player->money += (2000*(odds[0] - 96));
+			printf ("You Win $%d!\n", (2000*(odds[0] - 96)));
 		}
 		//lose(the casino) 
 		else
 		{
-			player->money -= (2000*(ch[0] - 96));
-			printf ("You Loose $%d.\n", (2000*(ch[0] - 96)));
+			player->money -= (2000*(odds[0] - 96));
+			printf ("You Loose $%d.\n", (2000*(odds[0] - 96)));
 		}
 		//up to 3 rounds
-		if (round == 3) break;
-
-		while (1) //fool-proof
+		if (round == 3) 
 		{
-			puts("Do you want to play again? Enter 'y' to continue, 'n' to leave the game.");
-			gets(ch3);
-			if (ch3[0] == 121)
-			{
-				playCondition = 1;
-				round ++;
-				break;
-			}
-			else if (ch3[0] == 110)
-			{
-				playCondition = 0;
-				break;
-			}
-			else
-			{
-				puts("Please enter correct content!");
-			}
+			puts ("This is the end of the game!");
+			break;
+		}
+
+		puts("Do you want to play again? Enter 'y' to continue, 'n' to leave the game.");
+		gets(gameStatus);
+		while (gameStatus[0] != 'y' && gameStatus[0] != 'n')	//fool-proof
+		{
+			puts("Please enter correct content!");
+			gets(gameStatus);
+		}
+		if (gameStatus[0] == 'y')
+		{
+			playCondition = 1;
+			round ++;
+		}
+		else if (gameStatus[0] == 'n')
+		{
+			playCondition = 0;
 		}
 	}
 }
