@@ -192,7 +192,7 @@ int main()
 		{0, -1, 5400},
    	};
 	//print the state, map, location of the player 
-	printPlayerInfo(&p1, &p2, b);
+	printPlayerInfo(&p1, &p2);
 	printPlayerLocation(&p1, &p2);
 	printLand();
 
@@ -207,7 +207,7 @@ int main()
 		if (p1.gameStatus >= 0)   //prevent the player is in jail now
 		{	
 			diceFace = 0;
-			printPlayerInfo(&p1, &p2, b);   //update status bar
+			printPlayerInfo(&p1, &p2);   //update status bar
 			printLand();   //print land
 
 			//user experience
@@ -221,14 +221,14 @@ int main()
 			}
 			system("CLS");
 			//print current map ,status, location
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 			Sleep(1000);
 
 			//move and update layout
 			move(&p1, &p2);
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 
@@ -244,7 +244,7 @@ int main()
 			}
 			system("CLS");
 			//update the layout
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 		}
@@ -272,7 +272,7 @@ int main()
 			diceFace = 0;
 
 			//update layout
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printLand();
 
 			//user experience
@@ -287,7 +287,7 @@ int main()
 			system("CLS");
 
 			//update layout
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 			Sleep(1000);
@@ -296,7 +296,7 @@ int main()
 			move(&p2, &p1);
 
 			//update layout
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 
@@ -312,7 +312,7 @@ int main()
 			}
 			//update layout
 			system("CLS");
-			printPlayerInfo(&p1, &p2, b);
+			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
 		}
@@ -323,7 +323,7 @@ int main()
 		}
 		system("CLS");
 		//update layout
-		printPlayerInfo(&p1, &p2, b);
+		printPlayerInfo(&p1, &p2);
 		printLand();
 		//count the number of rounds in which the player is continuously in debt
 		if (p2.money < 0) {
@@ -489,4 +489,3 @@ void printPlayerInfo(Player* p1, Player* p2)
 	snprintf(str105, sizeof(str105), "            Money: %-18d", p2->money);
 	landmark[105] = str105;
 }
-
