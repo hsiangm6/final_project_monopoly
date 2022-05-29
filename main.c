@@ -351,7 +351,7 @@ int main()
 		//open the next round or end the game
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 		gets(game_switch);
-		while (game_switch[0] != 'y') {
+		while (game_switch[0] != 'y' && game_switch[0] != 'n') {
 			puts("Whether open the next round? (Enter y to continue, n to end the game.)");
 			gets(game_switch);
 		}
