@@ -117,7 +117,7 @@ char *building[36] =
 	"2s@@s2" //35
 };
 
-int diceFace = 0;   //the number of dice used to know the step player moved 
+int diceFace = 15;   //the number of dice used to know the step player moved 
 int playerNow = 1;   //current operated player
 
 
@@ -206,7 +206,7 @@ int main()
 		playerNow = 1;
 		if (p1.gameStatus >= 0)   //prevent the player is in jail now
 		{	
-			diceFace = 0;
+			diceFace = 15;
 			printPlayerInfo(&p1, &p2);   //update status bar
 			printLand();   //print land
 
@@ -215,6 +215,7 @@ int main()
 			while (dice_switch = getch()) {   //fool-proof
 				if (dice_switch == ' ') {
 					srand(time(NULL)); //set random number seeds
+					diceFace = 0;
 					diceFace = 1 + (rand() % 6); //roll the dice
 					break;
 				}
@@ -269,7 +270,7 @@ int main()
 
 		if (p2.gameStatus >= 0)  //prevent player is in jail now
 		{
-			diceFace = 0;
+			diceFace = 15;
 
 			//update layout
 			printPlayerInfo(&p1, &p2);
@@ -280,6 +281,7 @@ int main()
 			while (dice_switch = getch()) {
 				if (dice_switch == ' ') {
 					srand(time(NULL)); //set random number seeds
+					diceFace = 0;
 					diceFace = 1 + (rand() % 6); //roll the dice
 					break;
 				}
@@ -477,7 +479,7 @@ void printPlayerInfo(Player* p1, Player* p2)
 	landmark[98] = str98;
 	
 	char static str100[38] = "";
-	snprintf(str100, sizeof(str100), "         Your roll dice is %-10d", diceFace);
+	snprintf(str100, sizeof(str100), "         Your roll dice is %-10c", (char)diceFace + 48);
 	landmark[100] = str100;
 
 	//player 2
