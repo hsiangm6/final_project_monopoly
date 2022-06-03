@@ -203,7 +203,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 	{
 		//land
 		case -1:
-			printf("buy price:%d\n", b->buyPrice);
+			printf("buy price: %d\n", b->buyPrice);
 			puts("Are you going to buy the land? (only y/n):");
 			gets(buy_switch);
 
@@ -235,7 +235,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 			if (b->owner == player->player_number) 
 			{
 				//whether build structure on own flag
-				printf("building price:%d\n", b->buildPrice);
+				printf("building price: %d\n", b->buildPrice);
 				puts("Are you going to build the structure? (only y/n):");
 				gets(buy_switch);
 
