@@ -82,7 +82,7 @@ void draw(Player *player, Player* receive, Building *b, char **landmark, char **
 				break;
 			//player location -1
 			case 8:
-				printf("You became a jewel thief and stole 50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", player->location - 1);
+				printf("You became a jewel thief and stole $50,000 worth of jewels, you were captured and deported from the country. \nYou are forced to go to the previous location: %d\n", player->location - 1);
 				player-> location -= 1;
 				event(player, receive, b,landmark, building);
 				break;
@@ -133,14 +133,14 @@ void casino (Player *player){
         //Coin Game
         if (casinoSwitch[0] == 'a'){
             system ("CLS"); //clean console
-            casinoCoin (Player *player);
+            casinoCoin (player);
             puts ("--------------------------------");
         }
 
         //Pirate Game
         else if (casinoSwitch[0] == 'b'){
             system ("CLS"); //clen the console
-            casinoPirate (Player *player);
+            casinoPirate (player);
             puts ("--------------------------------");
         }
 
@@ -156,7 +156,7 @@ void casinoCoin (Player *player){
                 
     if (player->money <2000) {//Do you have enough money?
         puts ("You don\'t have enough money!");
-        return 0;
+        return;
     }
 
     printf (">>> Heads or tails <<<\n");
@@ -179,7 +179,7 @@ void casinoCoin (Player *player){
                 }
         }
     }
-    else if (odds[0] == 'e') return 0;		//exit the game
+    else if (odds[0] == 'e') return;		//exit the game
                 
     puts("Please input front back selection. (f)front (b)back.");
     while (coinStatus[0] = getch()) { //fool-proof
