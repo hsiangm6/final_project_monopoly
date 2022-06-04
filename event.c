@@ -120,7 +120,7 @@ void casino (Player *player){
     int choosegame=3;
 
     while (choosegame > 0){
-        printf ("Welcom to casino games, please choose one game you want to play.\n");
+        printf ("Welcome to casino games, please choose one game you want to play.\n");
         printf ("You still have %d time(s) to choose.\n", choosegame);
         printf ("Input (a)Heads or tails (b)Pirate Barrel (e)exit\n");
         while (casinoSwitch[0] = getch()) { //fool-proof
