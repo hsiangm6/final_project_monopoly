@@ -23,6 +23,7 @@ typedef struct
 void event(Player* player, Player* receive, Building *b,char **landmark, char **building);   //activity in monopoly
 void draw(Player *player, Player* receive, Building *b, char **landmark, char **building);   //chance
 void casino(Player *player);   //casino game
+void casinoCoin (Player *player);	//casino coin game
+void casinoPirate (Player *player);	//casino pirate game
 void buy(Player *player, Player* receive, Building *b, char **landmark, char **building);   //purchase behaviour
 void buildingStructure(Building *b);   //Real estate purchase price, market value, toll
-
