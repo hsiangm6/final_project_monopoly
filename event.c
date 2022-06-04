@@ -225,7 +225,7 @@ void casinoPirate (Player *player){
         }
 
         printf ("------------ Round %d (%dx)------------\n", round+1, round+1);
-        puts ("Press 'y' to insert the knife, 'n' to end the game.");
+        puts ("Press (y) to insert the knife, (n) to end the game.");
                 
         while (roundSwitch = getch()) { //fool-proof
             if (roundSwitch == 'y' || roundSwitch == 'n') break;
@@ -238,12 +238,12 @@ void casinoPirate (Player *player){
             roundOdds = rand () % (14-round);
 
             if (roundOdds == 1 || roundOdds == 0){ //bomb out odds
-                printf ("The pirate bombed out. You loose $%d.\n", (2000 * round));
+                printf ("The pirate bounced up. You loose $%d.\n", (2000 * round));
                 player->money -= 2000 * round;
                 break;
             }
             else {
-                puts ("The pirate did not bombed out.");
+                puts ("The pirate did not bounce up.");
             }
         }
         else {
