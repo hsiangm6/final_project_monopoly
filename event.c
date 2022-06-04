@@ -115,85 +115,143 @@ void draw(Player *player, Player* receive, Building *b, char **landmark, char **
 }
 
 //casino game
-void casino (Player *player)
-{
-	char odds[2] = "\0", coinStatus[2] = "\0", gameStatus[2] = "\0";
-	int coin=0, FrontBack=0, round=1, playCondition=1;
-	while (playCondition == 1)
-	{
-		if (player->money <2000) //Do you have enough money?
-		{
-			puts ("You don\'t have enough money!");
-			break;
-		}
+void casino (Player *player){
+    char casinoSwitch[2]="\0";
+    int choosegame=3;
 
-		printf ("Welcome to Casino Game. Basic cost is $2000.\n");
-		printf ("This is round %d. Your current money is $%d.\n", round, player->money);
-		coin = rand () % 2;	//random front back
+    while (choosegame > 0){
+        printf ("Welcom to casino games, please choose one game you want to play.\n");
+        printf ("You still have %d time(s) to choose.\n", choosegame);
+        printf ("Input (a)Heads or tails (b)Pirate Barrel (e)exit\n");
+        while (casinoSwitch[0] = getch()) { //fool-proof
+            if (casinoSwitch[0] == 'a' || casinoSwitch[0] == 'b' || casinoSwitch[0] == 'e'){
+                choosegame--;
+                break;
+            }
+        }
 
+        //Coin Game
+        if (casinoSwitch[0] == 'a'){
+            system ("CLS"); //clean console
+            casinoCoin (Player *player);
+            puts ("--------------------------------");
+        }
 
-		puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-		gets(odds);
-		while (odds[0] > 101 || odds[0] < 97 )	//fool-proof
-		{
-			puts ("Please enter correct content!");
-			gets(odds);
-		}
-		if (odds[0] != 101){	
-			while (player->money < (2000*(odds[0]-96))){  //Do you have money?
-				puts ("You don\'t have enough money!");
-				puts ("Please input your odds selection again. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-				gets(odds);
-			}
-		}
-		else break;		//exit the game
-		
-		puts("Please input front back selection. (f)front (b)back.");
-		gets(coinStatus);
-		while (coinStatus[0] != 102 && coinStatus[0] != 98)	//fool-proof
-		{
-			puts("Please enter correct content!");
-			gets(coinStatus);
-		}
-		if (coinStatus[0] == 102) FrontBack = 0;
-		else if (coinStatus[0] == 98) FrontBack = 1;
+        //Pirate Game
+        else if (casinoSwitch[0] == 'b'){
+            system ("CLS"); //clen the console
+            casinoPirate (Player *player);
+            puts ("--------------------------------");
+        }
 
-		//win(the casino)
-		if (FrontBack == coin)
-		{
-			player->money += (2000*(odds[0] - 96));
-			printf ("You Win $%d!\n", (2000*(odds[0] - 96)));
-		}
-		//lose(the casino) 
-		else
-		{
-			player->money -= (2000*(odds[0] - 96));
-			printf ("You Loose $%d.\n", (2000*(odds[0] - 96)));
-		}
-		//up to 3 rounds
-		if (round == 3) 
-		{
-			puts ("This is the end of the game!");
-			break;
-		}
+        //exit casino
+        else if (casinoSwitch[0] == 'e') break;
+    }
+}
 
-		puts("Do you want to play again? Enter 'y' to continue, 'n' to leave the game.");
-		gets(gameStatus);
-		while (gameStatus[0] != 'y' && gameStatus[0] != 'n')	//fool-proof
-		{
-			puts("Please enter correct content!");
-			gets(gameStatus);
-		}
-		if (gameStatus[0] == 'y')
-		{
-			playCondition = 1;
-			round ++;
-		}
-		else if (gameStatus[0] == 'n')
-		{
-			playCondition = 0;
-		}
-	}
+//casino - Coin Game
+void casinoCoin (Player *player){
+    char odds[2] = "\0", coinStatus[2] = "\0", gameStatus[2] = "\0";
+    int coin=0, FrontBack=0, round=1, playCondition=1;
+                
+    if (player->money <2000) {//Do you have enough money?
+        puts ("You don\'t have enough money!");
+        return 0;
+    }
+
+    printf (">>> Heads or tails <<<\n");
+    printf ("Basic cost is $2000. Your current money is $%d.\n", player->money);
+
+    srand(time(NULL));
+    coin = rand () % 2;	//random front back
+
+    puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
+    while (odds[0] = getch()) { //fool-proof
+        if (odds[0] == 'a' || odds[0] == 'b' || odds[0] == 'c' || odds[0] == 'd' || odds[0] == 'e') break;
+    }
+
+    if (odds[0] != 'e'){
+        while (player->money < (2000*(odds[0]-96))){	//Do you have money?
+            puts ("You don\'t have enough money!");
+                puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
+                while (odds[0] = getch()) { //fool-proof
+                    if (odds[0] == 'a' || odds[0] == 'b' || odds[0] == 'c' || odds[0] == 'd' || odds[0] == 'e') break;
+                }
+        }
+    }
+    else if (odds[0] == 'e') return 0;		//exit the game
+                
+    puts("Please input front back selection. (f)front (b)back.");
+    while (coinStatus[0] = getch()) { //fool-proof
+        if (coinStatus[0] == 'f' || coinStatus[0] == 'b') break;
+    }
+
+    if (coinStatus[0] == 'f') FrontBack = 0;
+    else if (coinStatus[0] == 'b') FrontBack = 1;
+
+    //win(the casino)
+    if (FrontBack == coin) {
+        player->money += (2000*(odds[0] - 96));
+        printf ("You Win $%d!\n", (2000*(odds[0] - 96)));
+    }
+            //lose(the casino) 
+    else {
+        player->money -= (2000*(odds[0] - 96));
+        printf ("You Loose $%d.\n", (2000*(odds[0] - 96)));
+    }
+}
+
+//casino Pirate Game
+void casinoPirate (Player *player){
+    int round=0, roundOdds, roundSwitch;
+
+    puts (">>> Pirate Barrel Casino <<<");
+    printf ("Your current money is $%d.\n", player->money);
+    puts ("Basic cost is $2000");
+    player->money -= 2000;  //Basic cost
+
+    while (1){
+        if (round == 5) {
+            puts ("This is the last round of the game.\nGet $10000.");
+            player->money += 10000;
+            break;
+        }
+
+        if (player->money < (2000*round)) {
+            puts ("You don\'t have enough money to loose!");
+            printf ("Get $%d.\n", 2000 * round);
+            player->money += 2000 * round;
+            break;
+        }
+
+        printf ("------------ Round %d (%dx)------------\n", round+1, round+1);
+        puts ("Press 'y' to insert the knife, 'n' to end the game.");
+                
+        while (roundSwitch = getch()) { //fool-proof
+            if (roundSwitch == 'y' || roundSwitch == 'n') break;
+        }
+                
+        if (roundSwitch == 'y'){
+            round++;
+
+            srand(time(NULL));
+            roundOdds = rand () % (14-round);
+
+            if (roundOdds == 1 || roundOdds == 0){ //bomb out odds
+                printf ("The pirate bombed out. You loose $%d.\n", (2000 * round));
+                player->money -= 2000 * round;
+                break;
+            }
+            else {
+                puts ("The pirate did not bombed out.");
+            }
+        }
+        else {
+            printf ("End the game. Get $%d.\n", 2000 * round);
+            player->money += 2000 * round;
+            break;
+        }
+    }
 }
 
 //purchase behaviour
