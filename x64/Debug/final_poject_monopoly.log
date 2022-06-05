@@ -1,21 +1,2 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
-linux_event.obj : error LNK2005: buildingStructure 已在 event.obj 中定義過了
-linux_event.obj : error LNK2005: buy 已在 event.obj 中定義過了
-linux_event.obj : error LNK2005: casino 已在 event.obj 中定義過了
-linux_event.obj : error LNK2005: casinoCoin 已在 event.obj 中定義過了
-linux_event.obj : error LNK2005: casinoPirate 已在 event.obj 中定義過了
-linux_event.obj : error LNK2005: draw 已在 event.obj 中定義過了
-linux_event.obj : error LNK2005: event 已在 event.obj 中定義過了
-main.obj : error LNK2005: delay 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: delayms 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: endGame 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: main 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: move 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: printLand 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: printPlayerInfo 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: printPlayerLocation 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: landmark 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: building 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: diceFace 已在 linux_main.obj 中定義過了
-main.obj : error LNK2005: playerNow 已在 linux_main.obj 中定義過了
-C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe : fatal error LNK1169: 找到有一或多個已定義的符號
+  final_poject_monopoly.vcxproj -> C:\Users\hsian\Documents\GitHub\final_poject_monopoly\x64\Debug\final_project_monopoly.exe
