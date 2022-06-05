@@ -166,14 +166,14 @@ void casino (Player *player){
 
         //Coin Game
         if (casinoSwitch[0] == 'a'){
-            system ("CLS"); //clean console
+            printf("\033[0;0H\033[2J"); //clean console
             casinoCoin (player);
             puts ("--------------------------------");
         }
 
         //Pirate Game
         else if (casinoSwitch[0] == 'b'){
-            system ("CLS"); //clen the console
+            printf("\033[0;0H\033[2J"); //clen the console
             casinoPirate (player);
             puts ("--------------------------------");
         }
