@@ -361,7 +361,7 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				player->money -= b->fee;
 				receive->money += b->fee;
 
-				printf("Are you going to buy the flag from your opponent for %d? (only y/n):", b->buyPriceFromTheOpponent);
+				printf("Are you going to buy the flag from your opponent for %d? (only y/n):\n", b->buyPriceFromTheOpponent);
 				
 				//fool-proof 
 				while (buy_switch[0] = getchar()) {

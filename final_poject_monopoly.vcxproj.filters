@@ -24,6 +24,9 @@
     <ClCompile Include="linux_main.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="linux_event.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="event.h">

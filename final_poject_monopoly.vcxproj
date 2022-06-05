@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="event.c" />
+    <ClCompile Include="linux_event.c" />
     <ClCompile Include="linux_main.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
