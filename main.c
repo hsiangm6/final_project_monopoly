@@ -494,9 +494,3 @@ void delayms(int seconds)
 	clock_t lay = (clock_t)seconds * CLOCKS_PER_SEC * 0.25;
 	while((clock()-start) < lay);
 }
-
-
-
-
-
-
