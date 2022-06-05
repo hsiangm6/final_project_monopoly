@@ -154,7 +154,7 @@ void casino (Player *player){
         printf ("Welcome to casino games, please choose one game you want to play.\n");
         printf ("You still have %d time(s) to choose.\n", choosegame);
         printf ("Input (a)Heads or tails (b)Pirate Barrel (e)exit\n");
-        while (casinoSwitch[0] = _getche()) { //fool-proof
+        while (casinoSwitch[0] = _getch()) { //fool-proof
             if (casinoSwitch[0] == 'a' || casinoSwitch[0] == 'b' || casinoSwitch[0] == 'e'){
                 choosegame--;
                 break;
@@ -197,7 +197,7 @@ void casinoCoin (Player *player){
     coin = rand () % 2;	//random front back
 
     puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-    while (odds[0] = _getche()) { //fool-proof
+    while (odds[0] = _getch()) { //fool-proof
         if (odds[0] == 'a' || odds[0] == 'b' || odds[0] == 'c' || odds[0] == 'd' || odds[0] == 'e') break;
     }
 
@@ -205,7 +205,7 @@ void casinoCoin (Player *player){
         while (player->money < (2000*(odds[0]-96))){	//Do you have money?
             puts ("You don\'t have enough money!");
                 puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-                while (odds[0] = _getche()) { //fool-proof
+                while (odds[0] = _getch()) { //fool-proof
                     if (odds[0] == 'a' || odds[0] == 'b' || odds[0] == 'c' || odds[0] == 'd' || odds[0] == 'e') break;
                 }
         }
@@ -213,7 +213,7 @@ void casinoCoin (Player *player){
     else if (odds[0] == 'e') return;		//exit the game
                 
     puts("Please input front back selection. (f)front (b)back.");
-    while (coinStatus[0] = _getche()) { //fool-proof
+    while (coinStatus[0] = _getch()) { //fool-proof
         if (coinStatus[0] == 'f' || coinStatus[0] == 'b') break;
     }
 
@@ -258,7 +258,7 @@ void casinoPirate (Player *player){
         printf ("------------ Round %d (%dx)------------\n", round+1, round+1);
         puts ("Press (y) to insert the knife, (n) to end the game.");
                 
-        while (roundSwitch = _getche()) { //fool-proof
+        while (roundSwitch = _getch()) { //fool-proof
             if (roundSwitch == 'y' || roundSwitch == 'n') break;
         }
                 
