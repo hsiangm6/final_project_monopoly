@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <conio.h>
+//#include <conio.h>
 
 //activity in monopoly
 void event(Player* player, Player* receive, Building *b, char **landmark, char **building)

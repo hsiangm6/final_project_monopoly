@@ -1,9 +1,11 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(510,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (final_poject_monopoly.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
   event.c
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(12,12): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(21,31): warning C4013: '_getch' 未定義; 假設 extern 傳回整數
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(130,9): warning C4013: 'gets' 未定義; 假設 extern 傳回整數
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(196,15): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(268,23): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(300,33): warning C4013: '_getche' 未定義; 假設 extern 傳回整數
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(460,22): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(462,15): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
 C:\Users\hsian\Documents\GitHub\final_poject_monopoly\final_poject_monopoly\event.c(463,35): warning C4244: '=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
