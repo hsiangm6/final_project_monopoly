@@ -121,7 +121,8 @@ int diceFace = 15;   //the number of dice used to know the step player moved
 int playerNow = 1;   //current operated player
 
 
-void delay(double seconds);   //let the program sleep for assigned seconds
+void delay(int seconds);   //let the program sleep for assigned seconds
+void delayms(int seconds);   //let the program sleep for assigned milliseconds
 void printLand();   //map
 void printPlayerLocation(Player* p1, Player* p2);   //the players' position on the map
 void printPlayerInfo(Player *p1, Player *p2);   //change the row of the player status in the middle of the map
@@ -136,7 +137,7 @@ int main()
 	int event_switch = 0;   //check player whether they know the information
 	
 	puts("Welcome to the Smile Monopoly ! ");
-	delay(3);
+	delay(2);
 	system("CLS");
 	
 	//enter the name of the player
@@ -260,7 +261,7 @@ int main()
 
 		//player 2 round
 		playerNow = 2;
-		delay(0.5);
+		delayms(2);
 		system("CLS");
 
 		if (p2.gameStatus >= 0)  //prevent player is in jail now
@@ -444,7 +445,7 @@ void move(Player *now_player, Player *wait_player) {  //move(moving player,waiti
 		else
 			printPlayerLocation(wait_player, now_player);   //printPlayerLocation(p1,p2)
 		printLand();   //print the map and the player status
-		delay(0.75);
+		delayms(3);
 		system("CLS");
 	}
 }
@@ -480,9 +481,22 @@ void printPlayerInfo(Player* p1, Player* p2)
 	landmark[105] = str105;
 }
 
-void delay(double seconds)
+void delay(int seconds)
 {
 	clock_t start = clock();
 	clock_t lay = (clock_t)seconds * CLOCKS_PER_SEC;
 	while((clock()-start) < lay);
 }
+
+void delayms(int seconds)
+{
+	clock_t start = clock();
+	clock_t lay = (clock_t)seconds * CLOCKS_PER_SEC * 0.25;
+	while((clock()-start) < lay);
+}
+
+
+
+
+
+
