@@ -19,7 +19,7 @@ void event(Player* player, Player* receive, Building *b, char **landmark, char *
 		player->gameStatus = -1;
 		puts("Welcome to the jail !\nYou are forbidden to roll the dice for one round !\n");
 		//check player whether they know the information
-		puts("Press space to continue...\n");
+		puts("Press space to continue...");
 		while (event_switch = getchar()) {
 			if (event_switch == ' ') {
 				break;
@@ -28,7 +28,7 @@ void event(Player* player, Player* receive, Building *b, char **landmark, char *
 		break;
 	case 2:
 	case 11://draw cards
-		puts("Press space to draw the card...\n");
+		puts("Press space to draw the card...");
 		//check player whether they know the information
 		while (draw_switch = getchar()) {
 			if (draw_switch == ' ') {
@@ -37,7 +37,7 @@ void event(Player* player, Player* receive, Building *b, char **landmark, char *
 		}
 		draw(player, receive, b, landmark, building);
 		//check player whether they know the information
-		puts("Press space to continue...\n");
+		puts("Press space to continue...");
 		while (event_switch = getchar()) {
 			if (event_switch == ' ') {
 				break;
@@ -47,7 +47,7 @@ void event(Player* player, Player* receive, Building *b, char **landmark, char *
 	case 9://casino
 		casino(player);
 		//check player whether they know the information
-		puts("Press space to continue...\n");
+		puts("Press space to continue...");
 		while (event_switch = getchar()) {
 			if (event_switch == ' ') {
 				break;
@@ -59,7 +59,7 @@ void event(Player* player, Player* receive, Building *b, char **landmark, char *
 		player->location = 0;
 		player->money += (5000+ 2500 * Go_money);
 		//check player whether they know the information
-		puts("Press space to continue...\n");
+		puts("Press space to continue...");
 		while (event_switch = getchar()) {
 			if (event_switch == ' ') {
 				break;
@@ -304,8 +304,9 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 			
 			//fool-proof design
 			while(buy_switch[0] = getchar()) {
-				if (buy_switch[0] == 'y' || buy_switch[0] == 'n');
-				break;
+				if (buy_switch[0] == 'y' || buy_switch[0] == 'n') {
+					break;
+				}
 			}
 
 			//buy the land
