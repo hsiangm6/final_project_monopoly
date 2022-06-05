@@ -322,14 +322,14 @@ int main()
 		else {
 			p2.debt_counter = 0;
 		}
-		//if the number of rounds in which the player is continuously in debt is 3, the player lose
+		//if the number of rounds in which the player is in debt, the player lose
 		if (p1.debt_counter == 1) {
-			printf("Sorry, %s is in a manner of continuous liability.\n", p1.name);
+			printf("Sorry, %s is in a manner of liability.\n", p1.name);
 			printf("Congratulate!! Player %s wins the game.\n", p2.name);
 			break;
 		}
 		else if (p2.debt_counter == 1) {
-			printf("Sorry, %s is in a manner of continuous liability.\n", p2.name);
+			printf("Sorry, %s is in a manner of liability.\n", p2.name);
 			printf("Congratulate!! Player %s wins the game.\n", p1.name);
 			break;
 		}
