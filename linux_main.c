@@ -138,7 +138,7 @@ int main()
     system ("stty -icanon"); //for linux only
 	puts("Welcome to the Smile Monopoly ! ");
 	delay(2);
-	system("CLS");
+	printf("\033[0;0H\033[2J");
 	
 	//enter the name of the player
 	puts("Please enter the name of player 1: ");
@@ -149,7 +149,7 @@ int main()
 	fgets(nameOfPlayer2, 16, stdin);
 	if(nameOfPlayer2[strlen(nameOfPlayer2) - 1] == '\n')
         nameOfPlayer2[strlen(nameOfPlayer2) - 1] = '\0';
-	system("CLS");
+	printf("\033[0;0H\033[2J");    //clean console
 	
 	//player 1 structure
 	Player p1 =
@@ -199,7 +199,7 @@ int main()
 	printLand();
 
 	delay(1);
-	system("CLS");
+	printf("\033[0;0H\033[2J");
 
 	//game start
 	while (game_switch[0] == 'y')
@@ -222,7 +222,7 @@ int main()
 					break;
 				}
 			}
-			system("CLS");
+			printf("\033[0;0H\033[2J");
 			//print current map ,status, location
 			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
@@ -239,7 +239,7 @@ int main()
 			event(&p1, &p2, b, landmark, building);
 
 			
-			system("CLS");
+			printf("\033[0;0H\033[2J");
 			//update the layout
 			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
@@ -262,7 +262,7 @@ int main()
 		//player 2 round
 		playerNow = 2;
 		delayms(2);
-		system("CLS");
+		printf("\033[0;0H\033[2J");
 
 		if (p2.gameStatus >= 0)  //prevent player is in jail now
 		{
@@ -282,7 +282,7 @@ int main()
 					break;
 				}
 			}
-			system("CLS");
+			printf("\033[0;0H\033[2J");
 
 			//update layout
 			printPlayerInfo(&p1, &p2);
@@ -302,7 +302,7 @@ int main()
 			event(&p2, &p1, b, landmark, building);
 
 			//update layout
-			system("CLS");
+			printf("\033[0;0H\033[2J");
 			printPlayerInfo(&p1, &p2);
 			printPlayerLocation(&p1, &p2);
 			printLand();
@@ -312,7 +312,7 @@ int main()
 		{
 			p2.gameStatus += 1;
 		}
-		system("CLS");
+		printf("\033[0;0H\033[2J");
 		//update layout
 		printPlayerInfo(&p1, &p2);
 		printLand();
@@ -336,7 +336,7 @@ int main()
 		}
 		//prevent ask whether players open the next round repeatedly when players are all in jail
 		if (p1.gameStatus < 0 && p2.gameStatus < 0) {
-			system("CLS");
+			printf("\033[0;0H\033[2J");
 			continue;
 		}
 		//open the next round or end the game
@@ -346,7 +346,7 @@ int main()
 				break;
 			}
 		}
-		system("CLS");
+		printf("\033[0;0H\033[2J");
 
 		//know who is winner
 		if (game_switch[0] == 'n') {
@@ -432,7 +432,7 @@ void endGame(Player *p1, Player *p2,  Building *b)
 void move(Player *now_player, Player *wait_player) {  //move(moving player,waiting player, 
 	size_t i = 0; //for-loop count
 	int Go_money = rand()% 3;
-	system("CLS");   //clear up the layout
+	printf("\033[0;0H\033[2J");   //clear up the layout
 	for (i = 0; i < diceFace; i++) {   //change the player's location step by step.
 		now_player->location += 1;
 		if (now_player->location > 17){   //pass the start point
@@ -446,7 +446,7 @@ void move(Player *now_player, Player *wait_player) {  //move(moving player,waiti
 			printPlayerLocation(wait_player, now_player);   //printPlayerLocation(p1,p2)
 		printLand();   //print the map and the player status
 		delayms(3);
-		system("CLS");
+		printf("\033[0;0H\033[2J");
 	}
 }
 
