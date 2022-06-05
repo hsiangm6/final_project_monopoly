@@ -212,7 +212,7 @@ int main()
 
 			//user experience
 			puts("Press space to roll the dice.\n");
-			while (dice_switch = getch()) {   //fool-proof
+			while (dice_switch = getche()) {   //fool-proof
 				if (dice_switch == ' ') {
 					srand(time(NULL)); //set random number seeds
 					diceFace = 0;
@@ -236,13 +236,7 @@ int main()
 			//execute related activity in monopoly
 			event(&p1, &p2, b, landmark, building);
 
-			//check player whether they know the information
-			puts("Press space to continue...\n");
-			while (event_switch = getch()) {
-				if (event_switch == ' ') {
-					break;
-				}
-			}
+			
 			system("CLS");
 			//update the layout
 			printPlayerInfo(&p1, &p2);
@@ -278,7 +272,7 @@ int main()
 
 			//user experience
 			puts("Press space to roll the dice.\n");
-			while (dice_switch = getch()) {
+			while (dice_switch = getche()) {
 				if (dice_switch == ' ') {
 					srand(time(NULL)); //set random number seeds
 					diceFace = 0;
@@ -305,13 +299,6 @@ int main()
 			//execute the activity in monopoly
 			event(&p2, &p1, b, landmark, building);
 
-			//check player whether they know the information
-			puts("Press space to continue...\n");
-			while (event_switch = getch()) {
-				if (event_switch == ' ') {
-					break;
-				}
-			}
 			//update layout
 			system("CLS");
 			printPlayerInfo(&p1, &p2);
@@ -335,12 +322,12 @@ int main()
 			p2.debt_counter = 0;
 		}
 		//if the number of rounds in which the player is continuously in debt is 3, the player lose
-		if (p1.debt_counter == 3) {
+		if (p1.debt_counter == 1) {
 			printf("Sorry, %s is in a manner of continuous liability.\n", p1.name);
 			printf("Congratulate!! Player %s wins the game.\n", p2.name);
 			break;
 		}
-		else if (p2.debt_counter == 3) {
+		else if (p2.debt_counter == 1) {
 			printf("Sorry, %s is in a manner of continuous liability.\n", p2.name);
 			printf("Congratulate!! Player %s wins the game.\n", p1.name);
 			break;
@@ -352,10 +339,10 @@ int main()
 		}
 		//open the next round or end the game
 		puts("Whether open the next round? (Enter y to continue, n to end the game.)");
-		gets(game_switch);
-		while (game_switch[0] != 'y' && game_switch[0] != 'n') {
-			puts("Whether open the next round? (Enter y to continue, n to end the game.)");
-			gets(game_switch);
+		while (game_switch[0] = _getche()) {
+			if (game_switch[0] == 'y' || game_switch[0] == 'n') {
+				break;
+			}
 		}
 		system("CLS");
 
@@ -442,13 +429,13 @@ void endGame(Player *p1, Player *p2,  Building *b)
 //according to the player in this segment, deciding whose location will change.
 void move(Player *now_player, Player *wait_player) {  //move(moving player,waiting player, 
 	size_t i = 0; //for-loop count
-	
+	int Go_money = rand()% 3;
 	system("CLS");   //clear up the layout
 	for (i = 0; i < diceFace; i++) {   //change the player's location step by step.
 		now_player->location += 1;
 		if (now_player->location > 17){   //pass the start point
 			now_player->location -= 18;
-			now_player->money += 10000;
+			now_player->money += (5000+ 2500 * Go_money);
 		}
 		//In order to match the input settings of printPlayerLocation(p1,p2)
 		if(playerNow == 1)

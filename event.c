@@ -8,30 +8,61 @@
 void event(Player* player, Player* receive, Building *b, char **landmark, char **building)
 {
 	int draw_switch = 0;
+	int event_switch = 0;
 	srand(time(NULL));
+	int Go_money = rand() % 3;
     switch(player->location)
 	{
 	case 5://jail
 		player->gameStatus = -1;
 		puts("Welcome to the jail !\nYou are forbidden to roll the dice for one round !\n");
+		//check player whether they know the information
+		puts("Press space to continue...\n");
+		while (event_switch = _getch()) {
+			if (event_switch == ' ') {
+				break;
+			}
+		}
 		break;
 	case 2:
 	case 11://draw cards
 		puts("Press space to draw the card...\n");
-		while (draw_switch = getch()) {
+		//check player whether they know the information
+		while (draw_switch = _getch()) {
 			if (draw_switch == ' ') {
 				break;
 			}
 		}
 		draw(player, receive, b, landmark, building);
+		//check player whether they know the information
+		puts("Press space to continue...\n");
+		while (event_switch = _getch()) {
+			if (event_switch == ' ') {
+				break;
+			}
+		}
 		break;
 	case 9://casino
 		casino(player);
-			break;
+		//check player whether they know the information
+		puts("Press space to continue...\n");
+		while (event_switch = _getch()) {
+			if (event_switch == ' ') {
+				break;
+			}
+		}
+		break;
 	case 14://go to start
 		puts("You find a tunnel back to the \"Go\"");
 		player->location = 0;
-		player->money += 10000;
+		player->money += (5000+ 2500 * Go_money);
+		//check player whether they know the information
+		puts("Press space to continue...\n");
+		while (event_switch = _getch()) {
+			if (event_switch == ' ') {
+				break;
+			}
+		}
 		break;
 	case 0:
 		break;
@@ -123,7 +154,7 @@ void casino (Player *player){
         printf ("Welcome to casino games, please choose one game you want to play.\n");
         printf ("You still have %d time(s) to choose.\n", choosegame);
         printf ("Input (a)Heads or tails (b)Pirate Barrel (e)exit\n");
-        while (casinoSwitch[0] = getch()) { //fool-proof
+        while (casinoSwitch[0] = _getche()) { //fool-proof
             if (casinoSwitch[0] == 'a' || casinoSwitch[0] == 'b' || casinoSwitch[0] == 'e'){
                 choosegame--;
                 break;
@@ -166,7 +197,7 @@ void casinoCoin (Player *player){
     coin = rand () % 2;	//random front back
 
     puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-    while (odds[0] = getch()) { //fool-proof
+    while (odds[0] = _getche()) { //fool-proof
         if (odds[0] == 'a' || odds[0] == 'b' || odds[0] == 'c' || odds[0] == 'd' || odds[0] == 'e') break;
     }
 
@@ -174,7 +205,7 @@ void casinoCoin (Player *player){
         while (player->money < (2000*(odds[0]-96))){	//Do you have money?
             puts ("You don\'t have enough money!");
                 puts ("Please input your odds selection. (a)x1 (b)x2 (c)x3 (d)x4 (e)exit game.");
-                while (odds[0] = getch()) { //fool-proof
+                while (odds[0] = _getche()) { //fool-proof
                     if (odds[0] == 'a' || odds[0] == 'b' || odds[0] == 'c' || odds[0] == 'd' || odds[0] == 'e') break;
                 }
         }
@@ -182,7 +213,7 @@ void casinoCoin (Player *player){
     else if (odds[0] == 'e') return;		//exit the game
                 
     puts("Please input front back selection. (f)front (b)back.");
-    while (coinStatus[0] = getch()) { //fool-proof
+    while (coinStatus[0] = _getche()) { //fool-proof
         if (coinStatus[0] == 'f' || coinStatus[0] == 'b') break;
     }
 
@@ -227,7 +258,7 @@ void casinoPirate (Player *player){
         printf ("------------ Round %d (%dx)------------\n", round+1, round+1);
         puts ("Press (y) to insert the knife, (n) to end the game.");
                 
-        while (roundSwitch = getch()) { //fool-proof
+        while (roundSwitch = _getche()) { //fool-proof
             if (roundSwitch == 'y' || roundSwitch == 'n') break;
         }
                 
@@ -264,13 +295,11 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 		case -1:
 			printf("buy price: %d\n", b->buyPrice);
 			puts("Are you going to buy the land? (only y/n):");
-			gets(buy_switch);
-
-			//fool?proof design
-			while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
-			{  
-				puts("Are you going to buy the land? (only y/n):");
-				gets(buy_switch);
+			
+			//fool-proof design
+			while(buy_switch[0] = _getche()) {
+				if (buy_switch[0] == 'y' || buy_switch[0] == 'n');
+				break;
 			}
 
 			//buy the land
@@ -296,13 +325,12 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				//whether build structure on own flag
 				printf("building price: %d\n", b->buildPrice);
 				puts("Are you going to build the structure? (only y/n):");
-				gets(buy_switch);
 
 				//fool-proof
-				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
-				{
-					puts("Are you going to build the structure? (only y/n):");
-					gets(buy_switch);
+				while (buy_switch[0] = _getche()) {
+					if (buy_switch[0] == 'y' || buy_switch[0] == 'n') {
+						break;
+					}
 				}
 
 				if (buy_switch[0] == 'y') 
@@ -327,13 +355,12 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 				receive->money += b->fee;
 
 				printf("Are you going to buy the flag from your opponent for %d? (only y/n):", b->buyPriceFromTheOpponent);
-				gets(buy_switch);
-
+				
 				//fool-proof 
-				while (buy_switch[0] != 'y' && buy_switch[0] != 'n') 
-				{
-					puts("Are you going to buy the flag from your opponent? (only y/n):");
-					gets(buy_switch);
+				while (buy_switch[0] = _getche()) {
+					if (buy_switch[0] == 'y' || buy_switch[0] == 'n') {
+						break;
+					}
 				}
 				
 				//buy someone else's flag
@@ -358,6 +385,36 @@ void buy(Player *player, Player* receive, Building *b, char **landmark, char **b
 			if (b->owner == player->player_number) 
 			{
 				puts("You arrive your own estate!\n");
+				if(player->location <= 5 && player->location >= 0 ){
+					if(receive->location <= 5 && receive->location >= 0){
+						if(receive->gameStatus < 0){
+							receive->gameStatus++;
+						}
+						receive->location = player->location;
+						buy(receive,player, b, landmark, building);
+					}
+				}
+				if(player->location <= 9 && player->location >= 5 ){
+					if(receive->location <= 9 && receive->location >= 5){
+						if(receive->gameStatus < 0){
+							receive->gameStatus++;
+						}
+						receive->location = player->location;
+						buy(receive,player, b, landmark, building);
+					}
+				}
+				if(player->location <= 14 && player->location >= 9 ){
+					if(receive->location <= 14 && receive->location >= 9){
+						receive->location = player->location;
+						buy(receive,player, b, landmark, building);
+					}
+				}
+				if((player->location <= 17 && player->location >= 14 ) || player->location == 0){
+					if((receive->location <= 17 && receive->location >= 14 ) || receive->location == 0){
+						receive->location = player->location;
+						buy(receive,player, b, landmark, building);
+					}
+				}
 				break;
 			}
 
